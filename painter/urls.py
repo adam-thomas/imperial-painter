@@ -1,9 +1,9 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 
 urlpatterns = [
-    url(r'^noreload$', views.CardDisplay.as_view(), name='card_display_noreload'),
-    url(r'^$', views.CardDisplayReload.as_view(), name='card_display'),
+    path("noreload", views.CardDisplay.as_view(), name="card_display_noreload"),
+    path("", views.CardDisplayReload.as_view(), name="card_display"),
 ]

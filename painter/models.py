@@ -1,6 +1,5 @@
 from django.core.validators import MinValueValidator
 from django.db import models
-from jsonfield import JSONField
 
 
 class Card(models.Model):
@@ -8,7 +7,7 @@ class Card(models.Model):
     name = models.CharField(max_length=255)
     template_name = models.CharField(max_length=255)
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)], default=1)
-    data = JSONField(default={})
+    data = models.JSONField(default={})
 
     def __str__(self):
         return self.name

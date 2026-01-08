@@ -1,20 +1,2 @@
-# Python output
-__pycache__
-*.pyc
-.coverage
-.coverage.*
-.cache
-
-# Python venv folders
-bin
-lib
-lib64
-share
-pyvenv.cfg
-
-# Build output
-dist/
-*.egg-info
-
-# Excel lockfiles
-~$*.xls*
+# Created by venv; see https://docs.python.org/3/library/venv.html
+*
