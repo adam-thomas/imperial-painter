@@ -2,18 +2,17 @@ from setuptools import find_packages, setup
 
 setup(
     name="imperial-painter",
-    version="1.0.0",
+    version="1.1.0",
     include_package_data=True,
     packages=find_packages(),
 
     install_requires=[
-        'django>=1.11.20',
-        'django-extensions>=2.1.6',
-        'django-jsonfield>=1.1.0',
-        'dj_database_url>=0.3.0',
-        'lxml>=4.3.3',
-        'openpyxl>=2.6.2',
-        'psycopg2>=2.8.1',
+        "dj-database-url==3.1.0",
+        "Django==6.0.1",
+        "django-extensions==4.1",
+        "lxml==6.0.2",
+        "openpyxl==3.1.5",
+        "psycopg2-binary==2.9.11",
     ],
 
     author="Adam Thomas",
