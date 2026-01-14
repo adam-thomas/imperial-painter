@@ -1,23 +1,9 @@
+{% extends "painter/_base.html" %}
+
 {% load index %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Imperial Painter</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Sarabun|ZCOOL+XiaoWei" rel="stylesheet">
-
-    {% include "custom/headers.html" %}
-
-    <link rel="stylesheet/less" type="text/css" href="{% static "styles/layout.less" %}">
-    <link rel="stylesheet/less" type="text/css" href="{% static "styles/custom.less" %}" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
-</head>
-
-<body>
+{% block body %}
     <div class="spoiler">
         <div class="row">
             {% for object in object_list %}
@@ -49,5 +35,4 @@
             {% endfor %}
         </div>
     </div>
-</body>
-</html>
+{% endblock body %}

@@ -6,7 +6,7 @@ help:
 	@echo " make help      -- display this help"
 	@echo " make install   -- install requirements and set up the database"
 	@echo " make test      -- run tests"
-	@echo " make paint     -- run imperial-painter at 127.0.0.1:8000"
+	@echo " make run       -- run imperial-painter at 127.0.0.1:8000"
 
 install:
 # 	pip install -r requirements.txt
@@ -16,8 +16,7 @@ install:
 	python manage.py migrate
 
 test:
-	@coverage run manage.py test --keepdb --verbosity=$(verbosity)
-	@coverage report -m
+	@bin/python manage.py test --keepdb --verbosity=$(verbosity)
 
-paint:
-	@python manage.py runserver
+run:
+	@bin/python manage.py runserver

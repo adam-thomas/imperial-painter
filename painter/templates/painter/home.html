@@ -1,0 +1,9 @@
+{% extends "painter/_base.html" %}
+
+{% block body %}
+    <form method="post" action="{% url "home" %}">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Generate</button>
+    </form>
+{% endblock body %}

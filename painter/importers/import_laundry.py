@@ -1,11 +1,9 @@
 from painter.models import Card
-from .import_cards import Command as BaseImportCommand
+from .import_cards import CardImporter as BaseCardImporter
 
 
-class Command(BaseImportCommand):
-    help = ('Clears the database of cards, then fills it with the contents of one or' +
-            ' more specified XLSX files. Parses a Laundry character sheet,' +
-            ' looking for a specific layout.')
+class CardImporter(BaseCardImporter):
+    """A specific importer for the Laundry Files generator."""
 
     def convert_to_python(self, worksheet):
         """
@@ -36,28 +34,28 @@ class Command(BaseImportCommand):
 
         # Arrange derived stats by their keys, so they can be more organised.
         derived_stats = {
-            self.make_safe_name(row['derived_stat']): row
+            self.make_safe_name(row["derived_stat"]): row
             for row in derived_stat_table
         }
 
         # Damage bonuses are converted to dice, using a table.
         # Automate that here and add it to derived_stats.
-        bonus = int(derived_stats['damage_bonus']['value'])
+        bonus = int(derived_stats["damage_bonus"]["value"])
 
         if bonus <= 12:
-            bonus_die = '-1d6'
+            bonus_die = "-1d6"
         elif bonus <= 16:
-            bonus_die = '-1d4'
+            bonus_die = "-1d4"
         elif bonus <= 24:
-            bonus_die = 'None'
+            bonus_die = "None"
         elif bonus <= 32:
-            bonus_die = '+1d4'
+            bonus_die = "+1d4"
         elif bonus <= 40:
-            bonus_die = '+1d6'
+            bonus_die = "+1d6"
         else:
-            bonus_die = '+2d6'
+            bonus_die = "+2d6"
 
-        derived_stats['damage_bonus']['value'] = bonus_die
+        derived_stats["damage_bonus"]["value"] = bonus_die
 
         # For the skills, we also want to invert the table, but we also need
         # to collapse specialisations into bracketed names. For instance,
@@ -78,19 +76,19 @@ class Command(BaseImportCommand):
 
         for skill_row in skill_table:
             # Grab the name of the skill, since we'll need it.
-            name = skill_row['skill']
+            name = skill_row["skill"]
 
             # If this skill is a speciality (we can tell because its name
             # was indented with spaces, so now begins with some underscores),
             # add it to the name of its 'parent'.
             # If it's not a speciality, save it as the next parent_skill_name
             # in case it has specialities of its own.
-            if (name[0] == ' '):
+            if (name[0] == " "):
                 # Remove the indent spaces.
                 name = name.lstrip()
 
                 # Filter out the 'Speciality N' example rows.
-                if (name.startswith('Speciality')):
+                if (name.startswith("Speciality")):
                     continue
 
                 name = '{parent} ({speciality})'.format(
@@ -102,23 +100,23 @@ class Command(BaseImportCommand):
 
             # If the skill has a value and that value is at least 1, create
             # an entry for it in `skills`.
-            value = skill_row['total']
+            value = skill_row["total"]
             if (value is not None and int(value) > 2):
                 skills.append({
-                    'name': name,
-                    'value': value,
+                    "name": name,
+                    "value": value,
                 })
 
-        # Use some swanky Python 3.5 syntax to merge dictionaries together,
-        # putting the identity and trait data on the root level.
+        # Merge the dictionaries together, putting the identity and trait data on
+        # the root level.
         character = {
             **identity,
             **traits,
-            'stats': stat_table,
-            'derived_stats': derived_stats,
-            'skills': skills,
-            'spells': spell_table,
-            'weapons': weapon_table,
+            "stats": stat_table,
+            "derived_stats": derived_stats,
+            "skills": skills,
+            "spells": spell_table,
+            "weapons": weapon_table,
         }
 
         return [character]
@@ -130,29 +128,29 @@ class Command(BaseImportCommand):
         - Skills
         - Spells and weapons
         """
-        name = card_data.pop('name')
+        name = card_data.pop("name")
         if not name:
             return []
 
         cards = [
             Card(
                 name=name,
-                template_name='stats.html',
+                template_name="stats.html",
                 quantity=1,
                 data=card_data,
             ),
             Card(
                 name=name,
-                template_name='skills.html',
+                template_name="skills.html",
                 quantity=1,
                 data=card_data,
             ),
         ]
 
-        if card_data['spells'] or card_data['weapons']:
+        if card_data["spells"] or card_data["weapons"]:
             cards.append(Card(
                 name=name,
-                template_name='spells.html',
+                template_name="spells.html",
                 quantity=1,
                 data=card_data,
             ))
