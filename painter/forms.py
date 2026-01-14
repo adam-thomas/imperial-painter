@@ -1,29 +1,53 @@
+from pathlib import Path
+
 from django import forms
 from django.conf import settings
+from django.core.exceptions import ValidationError
+
+from .models import CachedFilePath
 
 
 GENERATOR_CHOICES = [(g["key"], g["name"]) for g in settings.GENERATORS.values()]
 
 
-class BoundFilePathField(forms.BoundField):
-    """
-    Django doesn't provide a field that allows you to select a file path using
-    a file selection dialog. We can fake it using a CharField with a FileInput
-    widget, but we need to override the BoundField instance as well so that
-    the incoming value is still treated as text, not a file.
-    """
-    @property
-    def data(self):
-        return self.form._widget_data_value(forms.TextInput(), self.html_name)
+def validate_xlsx_path(file_path):
+    # Check the file path leads to a file that actually exists, and has the
+    # correct extension.
+    # If not, raise ValidationError. If it does, cache it in the database.
+    file_object = Path(file_path)
+    if not file_object.is_file():
+        raise ValidationError(f"Could not find a file at: {file_path}")
+    if file_object.suffix != ".xlsx":
+        raise ValidationError(f"Please supply a path to an .xlsx file.")
+    
+    CachedFilePath.objects.update_or_create(path=file_path)
+
+
+def get_cached_paths():
+    paths = CachedFilePath.objects.values_list("path", flat=True)
+    paths = [(path, path) for path in paths]
+    return [(None, "Enter a new path"), *paths]
 
 
 class SelectGeneratorForm(forms.Form):
     generator = forms.ChoiceField(
         widget=forms.RadioSelect,
         choices=GENERATOR_CHOICES,
+        label="Select a generator",
+        label_suffix="",
     )
 
-    file_path = forms.CharField(
-        widget=forms.FileInput,
-        bound_field_class=BoundFilePathField,
+    old_file_path = forms.ChoiceField(
+        widget=forms.RadioSelect,
+        required=False,
+        choices=get_cached_paths,
+        label="Choose a previous file...",
+        label_suffix="",
+    )
+
+    new_file_path = forms.CharField(
+        required=False,
+        label="...or enter a new file path (.xlsx)",
+        label_suffix="",
+        validators=[validate_xlsx_path],
     )

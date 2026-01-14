@@ -3,7 +3,10 @@
 {% block body %}
     <form id="select-generator" method="post" action="{% url "home" %}">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">Generate</button>
+        <div class="form-columns">
+            {{ form.as_div }}
+        </div>
+
+        <button id="generate" type="submit">Generate</button>
     </form>
 {% endblock body %}

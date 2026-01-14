@@ -5,5 +5,70 @@
     font-size: 16rem;   
 
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 120rem;
+
+    .form-columns {
+        width: 95%;
+        max-width: 900rem;
+
+        display: flex;
+        flex-flow: row;
+        gap: 20rem;
+
+        & > div {
+            width: 100%;
+            flex: 0 1 auto;
+
+            padding: 20rem;
+            background-color: #c0c0c0;
+            border-radius: 20rem;
+
+            // The generator selection.
+            &:first-child {
+                legend {
+                    margin-bottom: 10rem;
+                }
+
+                #id_generator {
+                    display: flex;
+                    flex-flow: column;
+                    gap: 5rem;
+                }
+            }
+
+            // The file path selection.
+            &:last-child {
+                display: flex;
+                flex-flow: column;
+                gap: 10rem;
+            }
+        }
+    }
+
+    button#generate {
+        padding: 10rem 30rem;
+        border-radius: 10rem;
+        color: #ffffff;
+    }
+
+    &:invalid {
+        button#generate {
+            background-color: #aaaaaa;
+        }
+    }
+
+    &:valid {
+        button#generate {
+            background-color: #222222;
+            cursor: pointer;
+
+            &:hover, &:active {
+                box-shadow: 0 0 0 2px #67B354;
+                color: #67B354;
+            }
+        }
+    }
 }

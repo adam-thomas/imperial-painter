@@ -19,15 +19,13 @@ class Home(FormView):
     template_name = "painter/home.html"
     form_class = SelectGeneratorForm
 
-    def get_form_kwargs(self):
-        print(self.request.POST)
-        return super().get_form_kwargs()
-
     def form_valid(self, form):
         generator_key = form.cleaned_data["generator"]
         file_path = form.cleaned_data["file_path"]
-        b64_file_path = base64.b64encode(file_path.encode("utf-8")).decode("ascii")
 
+        # Encode the file path into base64 so it can be safely passed in the URL
+        # (without having to deal with multiple layers of URL encoding).
+        b64_file_path = base64.b64encode(file_path.encode("utf-8")).decode("ascii")
         return HttpResponseRedirect(f"/{generator_key}/{b64_file_path}")
 
 

@@ -27,4 +27,15 @@ class Card(models.Model):
         return template
 
     class Meta:
-        ordering = ['pk']
+        ordering = ["pk"]
+
+
+class CachedFilePath(models.Model):
+    path = models.FilePathField(unique=True)
+    last_used = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.path
+    
+    class Meta:
+        ordering = ["-last_used"]
