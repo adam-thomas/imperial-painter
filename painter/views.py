@@ -19,6 +19,10 @@ class Home(FormView):
     template_name = "painter/home.html"
     form_class = SelectGeneratorForm
 
+    def get_form_kwargs(self):
+        print(self.request.POST)
+        return super().get_form_kwargs()
+
     def form_valid(self, form):
         generator_key = form.cleaned_data["generator"]
         file_path = form.cleaned_data["file_path"]

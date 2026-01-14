@@ -1,7 +1,7 @@
 {% extends "painter/_base.html" %}
 
 {% block body %}
-    <form method="post" action="{% url "home" %}">
+    <form id="select-generator" method="post" action="{% url "home" %}">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Generate</button>
