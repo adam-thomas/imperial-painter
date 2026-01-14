@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView, ListView
 
 from . import models
-from .forms import SelectGeneratorForm
+from .forms import SelectGeneratorForm, EMPTY_OLD_PATH_VALUE
 
 # settings.IP_IMPORTER needs to point to a management command.
 # There are two default ones:
@@ -21,7 +21,9 @@ class Home(FormView):
 
     def form_valid(self, form):
         generator_key = form.cleaned_data["generator"]
-        file_path = form.cleaned_data["file_path"]
+        file_path = form.cleaned_data["old_file_path"]
+        if file_path == EMPTY_OLD_PATH_VALUE:
+            file_path = form.cleaned_data["new_file_path"]
 
         # Encode the file path into base64 so it can be safely passed in the URL
         # (without having to deal with multiple layers of URL encoding).
