@@ -1,0 +1,18 @@
+
+<div class="background-image"></div>
+
+<div class="contents">
+    <header>
+        <h3>{{ name | safe }}</h3>
+
+        <p>{{ c.subtitle }}</p>
+    </header>
+
+    <div class="description block">
+        <p class="line">{{ c.appearance | safe }}</p>
+    </div>
+
+    <div class="relation block">
+        {{ c.relation }}
+    </div>
+</div>

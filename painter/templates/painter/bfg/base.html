@@ -1,0 +1,90 @@
+{% load index %}
+{% load static %}
+
+<div class="full-card">
+    <div class="card-contents">
+        <section class="title_and_squadron">
+            <div class="title">{{ name }}</div>
+
+            <div class="squadron">
+                {% if c.ship_names|length > 1 %}
+                    A Squadron of {{ c.ship_names|length }}, led by the <b>{{ c.ship_names|index:0|slice:"2:" }}</b>
+                {% else %}
+                    The <b>{{ c.ship_names|index:0 }}</b>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="main-stats table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Hits</td>
+                        <td>Speed</td>
+                        <td>Turns</td>
+                        <td>Shields</td>
+                        <td>Armour</td>
+                        <td>Turrets</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ c.hits }}</td>
+                        <td>{{ c.speed }}cm</td>
+                        <td>{{ c.turns }}°</td>
+                        <td>{{ c.shields }}</td>
+                        <td>{{ c.armour }}</td>
+                        <td>{{ c.turrets }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <td>Armament</td>
+                        <td>Rng/Spd</td>
+                        <td>Str</td>
+                        <td>Fire arc</td>
+                    </tr>
+                </thead>
+
+                {% for name in c.weapon_names %}
+                    <tbody>
+                        <tr>
+                            <td>{{ name }}</td>
+                            <td>{{ c.range|index:forloop.counter0 }}cm</td>
+                            <td>{{ c.firepower|index:forloop.counter0 }}</td>
+                            <td>{{ c.arc|index:forloop.counter0 }}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </section>
+
+        {% if c.abilities %}
+            <section>
+                <div class="abilities">
+                    <ul>
+                        {% for ability in c.abilities %}
+                            <li>{{ ability | safe }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+        {% endif %}
+
+        <section class="{% if c.ship_names|length > 3 %}two-columns{% endif %} health-bars">
+            {% for ship_name in c.ship_names %}
+                <div class="health-bar-entry">
+                    <div class="ship-name">{{ ship_name }}</div>
+                    <div class="boxes">
+                        {% for i in c.hits|to_int|times %}
+                            <div class="box"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+</div>

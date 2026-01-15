@@ -1,0 +1,32 @@
+.card-contents .health-bars {
+    display: grid;
+    gap: 8rem;
+
+    &.two-columns {
+        grid-template-rows: 1fr 1fr;
+        grid-auto-flow: column;
+    }
+
+    .health-bar-entry {
+        display: flex;
+        flex-flow: column;
+        gap: 2rem;
+
+        .ship-name {
+            font-weight: bold;
+        }
+
+        .boxes {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+
+            .box {
+                height: 11rem;
+                width: 11rem;
+                border: 1px solid #444444;
+                margin: 0 1rem;
+            }
+        }
+    }
+}
