@@ -3,18 +3,43 @@ import importlib
 
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from django.views.generic import FormView, ListView
+from django.views.generic import FormView, ListView, TemplateView
 
 from . import models
-from .forms import SelectGeneratorForm, EMPTY_OLD_PATH_VALUE
+from .forms import SelectFileForm, EMPTY_OLD_PATH_VALUE
 
 
-class Home(FormView):
+class Home(TemplateView):
     template_name = "painter/_core/home.html"
-    form_class = SelectGeneratorForm
+
+    def get_context_data(self, **kwargs):
+        return {
+            "generators": models.GENERATOR_CHOICES,
+            **super().get_context_data(**kwargs),
+        }
+    
+
+class FileSelect(FormView):
+    template_name = "painter/_core/file_select.html"
+    form_class = SelectFileForm
+
+    def dispatch(self, request, *args, **kwargs):
+        self.generator_key = kwargs["generator"]
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_form_kwargs(self):
+        return {
+            "generator_key": self.generator_key,
+            **super().get_form_kwargs(),
+        }
+
+    def get_context_data(self, **kwargs):
+        return {
+            "generator_key": self.generator_key,
+            **super().get_context_data(**kwargs),
+        }
 
     def form_valid(self, form):
-        generator_key = form.cleaned_data["generator"]
         file_path = form.cleaned_data["old_file_path"]
         if file_path == EMPTY_OLD_PATH_VALUE:
             file_path = form.cleaned_data["new_file_path"]
@@ -22,7 +47,7 @@ class Home(FormView):
         # Encode the file path into base64 so it can be safely passed in the URL
         # (without having to deal with multiple layers of URL encoding).
         b64_file_path = base64.b64encode(file_path.encode("utf-8")).decode("ascii")
-        return HttpResponseRedirect(f"/{generator_key}/{b64_file_path}")
+        return HttpResponseRedirect(f"/{self.generator_key}/{b64_file_path}")
 
 
 class CardDisplay(ListView):
@@ -30,9 +55,10 @@ class CardDisplay(ListView):
     template_name = "painter/_core/card_display.html"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["generator"] = self.generator_key
-        return context
+        return {
+            "generator_key": self.generator_key,
+            **super().get_context_data(**kwargs),
+        }
 
     def load_importer_class(self):
         """

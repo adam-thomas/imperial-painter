@@ -33,6 +33,8 @@ class Card(models.Model):
 
 
 class CachedFilePath(models.Model):
+    """A previously-used file path to an .xlsx file."""
+    generator_key = models.CharField(choices=GENERATOR_CHOICES)
     path = models.FilePathField(unique=True)
     last_used = models.DateTimeField(auto_now=True)
 

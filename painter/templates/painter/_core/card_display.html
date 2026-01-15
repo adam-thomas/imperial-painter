@@ -4,11 +4,11 @@
 {% load static %}
 
 {% block custom_styles %}
-    {% with "styles/"|add:generator|add:"/custom.less" as custom_styles_url %}
+    {% with "styles/"|add:generator_key|add:"/custom.less" as custom_styles_url %}
         <link rel="stylesheet/less" type="text/css" href="{% static custom_styles_url %}" />
     {% endwith %}
 
-    {% with "painter/"|add:generator|add:"/fonts.html" as custom_fonts_template %}
+    {% with "painter/"|add:generator_key|add:"/fonts.html" as custom_fonts_template %}
         {% include custom_fonts_template %}
     {% endwith %}
 {% endblock %}

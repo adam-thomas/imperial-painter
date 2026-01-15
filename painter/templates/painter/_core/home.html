@@ -1,12 +1,13 @@
 {% extends "painter/_core/base.html" %}
 
-{% block body %}
-    <form id="select-generator" method="post" action="{% url "home" %}">
-        {% csrf_token %}
-        <div class="form-columns">
-            {{ form.as_div }}
-        </div>
+{% load index %}
 
-        <button id="generate" type="submit">Generate</button>
-    </form>
+{% block body %}
+    <div id="select-generator">
+        <h2>Select a generator</h2>
+
+        {% for generator in generators %}
+            <a href="/{{ generator|index:0 }}">{{ generator|index:1 }}</a>
+        {% endfor %}
+    </div>
 {% endblock body %}
