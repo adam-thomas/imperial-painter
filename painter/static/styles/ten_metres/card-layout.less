@@ -1,0 +1,58 @@
+/* ----------------------------------------------------------------------- */
+/* Structure */
+/* ----------------------------------------------------------------------- */
+
+.full-card {
+    &, * {
+        box-sizing: border-box;
+    }
+
+    // Remove borders and margins from all divs (by default).
+    div {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card-contents {
+        height: 100%;
+        width: 100%;
+        padding: 3rem;
+
+        font-family: "Trebuchet MS";
+        font-size: 9rem;
+
+        display: flex;
+        flex-flow: column;
+
+        .title {
+            width: 100%;
+            text-align: center;
+            flex: 0 0 auto;
+
+            font-size: 15rem;
+            font-weight: bold;
+            padding-bottom: 3rem;
+        }
+
+        section {
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid #808080;
+            flex: 0 0 auto;
+        }
+
+        .flex-separator {
+            height: 100%;
+            flex: 0 1 auto;
+        }
+
+        .abilities {
+            font-size: 8rem;
+
+            ul {
+                list-style: none;
+            }
+        }
+    }
+}

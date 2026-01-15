@@ -17,7 +17,7 @@ The test app is a basic Django app that allows you to see `imperial-painter` in 
 * Create a database in `psql` with `create database painter;`.
 * Run migrations with `python manage.py migrate`.
 
-Once it's set up, you can run it using `make paint` or `python manage.py runserver`.
+Once it's set up, you can run it using `make run` or `python manage.py runserver`.
 
 Go to `127.0.0.1:8000` in your browser, and you should see some very rudimentary cards! Hit Print in your browser to turn them into real-life prototypes.
 

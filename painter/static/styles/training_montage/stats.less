@@ -1,0 +1,58 @@
+/* ----------------------------------------------------------------------- */
+/* Stats */
+/* ----------------------------------------------------------------------- */
+
+.card-contents-upper .stats-left {
+    padding-top: 5rem;
+
+    .stat-item {
+        width: 100%;
+        min-height: 35rem;
+        margin-bottom: 3rem;
+        vertical-align: center;
+        overflow: visible;
+
+        &:not(.bg-cost) {
+            color: var(--highlight-colour);
+            background-color: var(--style-colour);
+        }
+
+        .type-icon {
+            /* An icon for the card type. Extends above the frame. */
+            height: 33rem;
+            margin-bottom: 3rem;
+            margin-top: -3rem;
+            overflow: visible;
+        }
+
+        .stat-value {
+            /* A large number. */
+            font-weight: bold;
+            font-size: 25rem;
+            text-align: center;
+            letter-spacing: -1rem;
+            margin-left: -2rem;
+        }
+
+        .stat-label {
+            /* Some small text clarifying what the number means. */
+            font-size: 8rem;
+            text-align: center;
+            margin-top: -6rem;
+            padding-bottom: 1rem;
+            margin-left: -2rem;
+        }
+    }
+
+    .art-credit {
+        width: 100rem;
+        height: 20rem;
+
+        margin: -15rem 0 0 7rem;
+        transform: rotate(90deg);
+        transform-origin: bottom left;
+
+        font-size: 7rem;
+        color: #808080;
+    }
+}

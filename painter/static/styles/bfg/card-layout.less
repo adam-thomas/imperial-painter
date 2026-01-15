@@ -1,0 +1,68 @@
+
+.card-contents {
+    font-family: "Palatino Linotype", serif;
+    font-size: 8rem;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 8rem;
+
+    display: flex;
+    flex-flow: column;
+    gap: 11rem;
+
+    .title {
+        font-family: "Fjalla One", sans-serif;
+        text-transform: uppercase;
+        font-size: 16rem;
+    }
+
+    .squadron {
+        font-size: 7rem;
+        font-style: italic;
+    }
+
+    table {
+        width: 100%;
+        border-color: #444444;
+
+        border-spacing: 0;
+
+        &:not(:last-of-type) {
+            margin-bottom: 6rem;
+        }
+
+        thead {
+            font-family: "Fjalla One", sans-serif;
+            text-transform: uppercase;
+
+            background-color: #444444;
+            color: #ffffff;
+        }
+
+        td {
+            border-color: #444444;
+            padding: 1.5rem 1rem;
+        }
+    }
+
+    .abilities {
+        border: 1rem solid #444444;
+        background-color: #cccccc;
+        padding: 5rem;
+        font-size: 7rem;
+
+        ul {
+            list-style: none;
+
+            display: flex;
+            flex-flow: column;
+            gap: 5rem;
+        }
+    }
+
+    .health-bars {
+        margin-top: auto;
+    }
+}

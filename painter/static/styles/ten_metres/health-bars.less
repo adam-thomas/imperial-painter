@@ -1,0 +1,34 @@
+.card-contents .health-bars {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+
+    .health-bar-entry {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+
+        &:not(:first-of-type) {
+            margin-left: 10rem;
+        }
+
+        .stat-title {
+            margin-right: 3rem;
+            font-weight: bold;
+        }
+
+        .boxes {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+
+            .box {
+                height: 9rem;
+                width: 9rem;
+                border: 1px solid #555555;
+                margin: 0 1rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+
+.spell-entry, .weapon-entry {
+    width: 100%;
+    height: auto;
+
+    padding: 5rem 6rem 5rem 5rem;
+
+    .header {
+        width: 100%;
+        padding: 2rem 3rem 4rem 3rem;
+
+        font-size: 10rem;
+        line-height: 10rem;
+        background-color: @dark-grey;
+        color: #fff;
+
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+
+        .name {
+            width: 100%;
+            flex: 0 1 auto;
+        }
+
+        .level {
+            margin-right: 3rem;
+            flex: 0 0 auto;
+        }
+    }
+
+    .details {
+        padding: 0 2rem 0 2rem;
+        display: flex;
+        flex-flow: column;
+
+        .detail, .description {
+            width: 100%;
+        }
+
+        .detail {
+            font-weight: bold;
+            font-size: 9rem;
+
+            .value {
+                font-weight: normal;
+            }
+        }
+
+        .description {
+            margin-top: 2rem;
+        }
+    }
+}

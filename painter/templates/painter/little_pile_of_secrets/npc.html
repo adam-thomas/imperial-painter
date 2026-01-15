@@ -1,0 +1,14 @@
+{% load static %}
+
+<header>
+    <h3>{{ name }}</h3>
+    <p>{{ c.subtitle }}</p>
+</header>
+
+<div class="portrait block">
+    <img src="{% static 'images/little_pile_of_secrets/' %}{{ c.portrait }}" />
+</div>
+
+<div class="bio block">
+    <p>{{ c.bio | safe }}</p>
+</div>

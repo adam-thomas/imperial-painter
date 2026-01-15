@@ -1,0 +1,31 @@
+{% extends "painter/laundry/base.html" %}
+
+{% block contents %}
+    <div class="main-stat-block stat-block">
+        {% for stat in c.stats %}
+            <div class="stat-entry">
+                <div class="stat-name">
+                    <div class="short-name">{{ stat.short_name }}</div>
+                    <div class="full-name">{{ stat.stat }}</div>
+                </div>
+                <div class="value">{{ stat.value }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="stat-block">
+        {% for key, stat in c.derived_stats.items %}
+            {% if key != "damage_bonus" %}
+                <div class="{{ key }} stat-entry">
+                    <div class="stat-name">{{ stat.derived_stat }}</div>
+                    <div class="value">{{ stat.value }}</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div class="wide stat-entry">
+            <div class="stat-name">{{ c.derived_stats.damage_bonus.derived_stat }}</div>
+            <div class="wide value">{{ c.derived_stats.damage_bonus.value }}</div>
+        </div>
+    </div>
+{% endblock contents %}

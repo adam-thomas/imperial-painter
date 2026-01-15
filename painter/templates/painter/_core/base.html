@@ -1,0 +1,24 @@
+{% load index %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Imperial Painter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    {% comment %} <link href="https://fonts.googleapis.com/css?family=Sarabun|ZCOOL+XiaoWei" rel="stylesheet"> {% endcomment %}
+
+    <link rel="stylesheet/less" type="text/css" href="{% static "styles/_core/base.less" %}">
+    
+    {% block custom_styles %}{% endblock %}
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
+</head>
+
+<body>
+    {% block body %}{% endblock body %}
+</body>
+</html>

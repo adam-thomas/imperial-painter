@@ -7,26 +7,16 @@ from openpyxl import load_workbook
 from painter.models import Card
 
 
-class Command(BaseCommand):
-    help = ('Clears the database of cards, then fills it with the contents of one or' +
-            ' more specified XLSX files.')
+class CardImporter:
+    """
+    Clears the database of cards, then fills it with the contents of one or
+    more specified XLSX files.
+    """
+    def __init__(self, generator_key, filenames):
+        self.generator_key = generator_key
+        self.filenames = filenames
 
-    def add_arguments(self, parser):
-        parser.add_argument(
-            'filenames',
-            nargs='*',
-            type=str,
-            help='One or more XLSX file names. The extension is optional.',
-        )
-
-    def ensure_extension(self, filename, extension):
-        """Tag a filename with a given file format if it doesn't have one already."""
-        extension = '.' + extension
-        if filename.endswith(extension):
-            return filename
-        return filename + extension
-
-    def load_all_worksheets(self, filenames, verbosity=0):
+    def load_all_worksheets(self, verbosity=0):
         """
         Open a given series of Excel files and return all their worksheets.
 
@@ -35,26 +25,23 @@ class Command(BaseCommand):
         """
         all_sheets = []
 
-        for filename in filenames:
-            filename = self.ensure_extension(filename, 'xlsx')
-            if verbosity:
-                print("Loading {}".format(filename))
+        for filename in self.filenames:
+            print("Loading {}".format(filename))
 
             workbook = load_workbook(
                 filename=filename,
-                # read_only=True,  # read_only mode causes sharing violations...
-                data_only=True,  # Load the values computed by formulae, not the formulae
-                keep_vba=False,  # Throw away any VBA scripting
+                # read_only=True,  # Apparently read_only mode causes sharing violations.
+                data_only=True,  # Load the values computed by formulae, not the formulae.
+                keep_vba=False,  # Throw away any VBA scripting.
             )
 
-            valid_sheets = [w for w in workbook.worksheets if w.title[0] != '@']
+            valid_sheets = [w for w in workbook.worksheets if w.title[0] != "@"]
 
             all_sheets += valid_sheets
 
-        if verbosity:
-            titles = [w.title for w in all_sheets]
-            titles = ', '.join(titles)
-            print('Loading worksheets: {}'.format(titles))
+        titles = [w.title for w in all_sheets]
+        titles = ', '.join(titles)
+        print("Loading worksheets: {}".format(titles))
 
         return all_sheets
 
@@ -63,12 +50,12 @@ class Command(BaseCommand):
         Return a form of `value` that's usable as a variable name in a Django template.
         """
         # Replace all spaces with underscores.
-        value = value.lower().replace(' ', '_')
+        value = value.lower().replace(" ", "_")
 
         # Remove any non-alphanumeric characters from the name.
         # https://stackoverflow.com/a/2779487
         # https://docs.python.org/3/howto/regex.html#matching-characters
-        value = re.sub(r'\W+', '', value)
+        value = re.sub(r"\W+", "", value)
 
         return value
 
@@ -222,9 +209,9 @@ class Command(BaseCommand):
         """
         # Remove the name, template, and quantity fields from the rest of the data,
         # since they go directly on the Card instance.
-        name = card_data.pop('name', None)
-        template_string = card_data.pop('template', None)
-        quantity = card_data.pop('quantity', 1)
+        name = card_data.pop("name", None)
+        template_string = card_data.pop("template", None)
+        quantity = card_data.pop("quantity", 1)
 
         # If it has both a name and a template, add it. Otherwise, leave it out.
         # This allows for blank/incomplete/ignored rows to exist in the Excel file.
@@ -239,34 +226,26 @@ class Command(BaseCommand):
             Card(
                 name=name,
                 template_name=template.strip(),
+                generator_key=self.generator_key,
                 quantity=quantity,
                 data=card_data,
             )
             for template in template_list
         ]
 
-    def handle(self, *args, **options):
-        """DO ALL THE THINGS"""
-        verbosity = options['verbosity']
-
-        # The filenames are defined in a setting.
-        filenames = settings.IP_DATA_FILES
-        if not filenames:
-            return
-
+    def run_import(self):
         # Clear all card data before we go any further.
         Card.objects.all().delete()
 
         # Import!
-        worksheets = self.load_all_worksheets(filenames, verbosity)
+        worksheets = self.load_all_worksheets()
         python_data = []
         for sheet in worksheets:
             python_data += self.convert_to_python(sheet)
 
         # Stop right here if we don't have any data.
         if not python_data:
-            if verbosity:
-                print('No cards were created.')
+            print("No cards were created.")
             return
 
         # Create the card objects.
@@ -278,6 +257,5 @@ class Command(BaseCommand):
         Card.objects.bulk_create(cards)
 
         # Chirp triumphantly to stdout.
-        if verbosity:
-            print('{} cards created!'.format(len(cards)))
-            print(', '.join([c.name for c in cards]))
+        print("{} cards created!".format(len(cards)))
+        print(", ".join([c.name for c in cards]))

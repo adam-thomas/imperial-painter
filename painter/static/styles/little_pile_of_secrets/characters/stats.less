@@ -1,0 +1,87 @@
+.full-card.template-stats {
+    display: flex !important;
+    flex-flow: column;
+
+    .stats {
+        height: auto;
+        flex: 0 0 auto;
+
+        padding: 2rem 8rem;
+        // margin-bottom: 8rem;
+
+        flex-flow: row wrap;
+
+        .row {
+            width: 46%;
+            margin: 0 2% 2rem 2%;
+            padding: 3rem 4rem 3rem 6rem;
+
+            background: fade(@colour-sepia, 30%);
+
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+
+            .name {
+                width: 100%;
+                flex: 0 1 auto;
+
+                font-weight: bold;
+            }
+
+            .value {
+                width: 16rem;
+                height: 16rem;
+                flex: 0 0 auto;
+
+                // Use asymmetrical padding to visually centre the numbers.
+                padding: 1rem 2rem 2rem 2rem;
+
+                background-color: #fff;
+                font-size: 13rem;
+                font-weight: bold;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+
+    .abilities {
+        height: 100%;
+        flex: 0 1 auto;
+
+        .single-ability {
+            padding: 2rem 11rem;
+
+            &:not(:last-of-type) {
+                margin-bottom: 11rem;
+            }
+
+            .name-wrapper {
+                width: 100%;
+
+                padding-bottom: 1rem;
+                border-bottom: 1px solid @colour-sepia;
+
+                display: flex;
+                flex-flow: row;
+                align-items: flex-end;
+                justify-content: space-between;
+
+                h4 {
+                    font-size: 11rem;
+                }
+
+                span {
+                    font-size: 9rem;
+                }
+            }
+
+            .effect {
+                width: 100%;
+            }
+        }
+    }
+}

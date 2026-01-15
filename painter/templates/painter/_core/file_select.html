@@ -1,0 +1,12 @@
+{% extends "painter/_core/base.html" %}
+
+{% block body %}
+    <form id="select-file" method="post" action="{% url "file_select" generator=generator_key %}">
+        {% csrf_token %}
+        <div class="form-columns">
+            {{ form.as_div }}
+        </div>
+
+        <button id="generate" type="submit">Generate</button>
+    </form>
+{% endblock body %}

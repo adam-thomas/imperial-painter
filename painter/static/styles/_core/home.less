@@ -1,0 +1,55 @@
+#select-generator {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20rem;
+
+    h2 {
+        font-size: 16rem;
+    }
+
+    a {
+        height: 30rem;
+        min-width: 240rem;
+        padding: 0 20rem;
+
+        background-color: #c0c0c0;
+        border-radius: 5rem;
+
+        font-size: 12rem;
+        text-decoration: none;
+
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+
+        &, &:visited {
+            color: #222222;
+        }
+
+        &:hover, &:active {
+            font-size: 13rem;
+            font-weight: bold;
+            box-shadow: 0 0 0 2px #67B354;
+        }
+    }
+}
+
+
+    &:valid {
+        button#generate {
+            background-color: #222222;
+            cursor: pointer;
+
+            &:hover, &:active {
+                box-shadow: 0 0 0 2px #67B354;
+                color: #67B354;
+            }
+        }
+    }

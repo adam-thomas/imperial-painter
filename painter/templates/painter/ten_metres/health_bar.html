@@ -1,0 +1,13 @@
+{% load index %}
+
+
+{% if stat %}
+    <div class="health-bar-entry">
+        <div class="stat-title">{{ stat_title }}</div>
+        <div class="boxes">
+            {% for i in stat|to_int|times %}
+                <div class="box"></div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

@@ -10,7 +10,6 @@ psycopg2-binary==2.9.11
 # Development help
 # TODO: tidy these up, modernise testing approach, remove coverage etc
 colour-runner==0.1.1
-coverage==7.13.1
 factory_boy==3.3.3
 flake8==7.3.0
 flake8_import_order==0.19.2

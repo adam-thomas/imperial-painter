@@ -1,0 +1,30 @@
+<section class="weapon">
+    <div class="name"><b>Weapon:</b> {{ name }}</div>
+
+    <div class="weapon-stats table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <td>RNG</td>
+                    <td>ROF</td>
+                    <td>DMG</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ rng }}</td>
+                    <td>{{ rof }}</td>
+                    <td>{{ dmg }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="abilities">
+        <ul>
+            {% for ability in abilities %}
+                <li>{{ ability | safe }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>

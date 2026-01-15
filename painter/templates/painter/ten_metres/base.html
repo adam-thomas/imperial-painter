@@ -1,0 +1,70 @@
+{% load index %}
+{% load static %}
+
+<div class="full-card">
+    <div class="card-contents">
+        <div class="title">{{ name }}</div>
+
+        <section class="main-stats table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <td>MOV</td>
+                        <td>ACT</td>
+                        <td>SKI</td>
+                        <td>DEF</td>
+                        <td>ARM</td>
+                        {% if c.poi %}<td>POI</td>{% endif %}
+                        {% if c.str %}<td>STR</td>{% endif %}
+                        <td>TEC</td>
+                        <td>Base</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ c.mov }}</td>
+                        <td>{{ c.act }}</td>
+                        <td>{{ c.ski }}</td>
+                        <td>{{ c.def }}</td>
+                        <td>{{ c.arm }}</td>
+                        {% if c.poi %}<td>{{ c.poi }}</td>{% endif %}
+                        {% if c.str %}<td>{{ c.str }}</td>{% endif %}
+                        <td>{{ c.tec }}</td>
+                        <td>{{ c.base }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            {% if c.abilities %}
+                <div class="abilities">
+                    <ul>
+                        {% for ability in c.abilities %}
+                            <li>{{ ability | safe }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </section>
+
+        {% include "painter/ten_metres/weapon.html" with name=c.w1_name rng=c.w1_rng rof=c.w1_rof dmg=c.w1_dmg abilities=c.w1_abilities %}
+
+        {% include "painter/ten_metres/weapon.html" with name=c.w2_name rng=c.w2_rng rof=c.w2_rof dmg=c.w2_dmg abilities=c.w2_abilities %}
+
+        {% if c.actions %}
+            <section class="abilities">
+                <ul>
+                    {% for action in c.actions %}
+                        <li>{{ action | safe }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+
+        <div class="flex-separator"></div>
+
+        <section class="health-bars">
+            {% include "painter/ten_metres/health_bar.html" with stat=c.poi stat_title="POI" %}
+            {% include "painter/ten_metres/health_bar.html" with stat=c.str stat_title="STR" %}
+        </section>
+    </div>
+</div>

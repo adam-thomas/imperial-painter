@@ -1,0 +1,133 @@
+/* ----------------------------------------------------------------------- */
+/* Structure */
+/* ----------------------------------------------------------------------- */
+
+.full-card {
+    // Set the font here for scaling purposes.
+    font-family: "Trebuchet MS";
+    font-size: 10rem;
+
+    &, * {
+        box-sizing: border-box;
+    }
+
+    // Remove borders and margins from all divs (by default).
+    div {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    // The full card contains two divs layered on top of each other - one for the background
+    // and one for the card's contents.
+    // Use position: absolute so they don't get in each other's way.
+    .card-background {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .card-contents {
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: flex;
+        flex-flow: column;
+
+        // The card name, left stat column and all the rules text.
+        .card-contents-upper {
+            width: 100%;
+            height: 100%;
+            flex: 0 1 auto;
+
+            display: flex;
+            flex-flow: row;
+
+            .stats-left {
+                height: 100%;
+                width: 33rem;
+                flex: 0 0 auto;
+            }
+
+            .card-text {
+                height: 100%;
+                width: calc(100% - 33rem);
+                flex: 0 1 auto;
+
+                display: flex;
+                flex-flow: column;
+
+                .card-name {
+                    // No left/right padding on this one; allow it to extend into the border.
+                    padding-right: 5rem;
+                    width: 100%;
+                    min-height: 24rem;
+                    flex: 0 0 auto;
+                }
+
+                .card-body {
+                    // Separate the text from the stat column and right-hand border.
+                    padding: 7rem 17rem 15rem 9rem;
+                    width: 100%;
+                    height: 100%;
+                    flex: 0 1 auto;
+
+                    display: flex;
+                    flex-flow: column;
+
+                    .art-wrapper {
+                        width: 100%;
+                        height: 40%;
+                        flex: 0 0 auto;
+
+                        background-color: var(--faded-colour);
+                        margin-bottom: 7rem;
+
+                        overflow: hidden;
+                        display: flex;
+                        flex-flow: column;
+                        align-items: center;
+
+                        .art {
+                            width: 100%;
+                            height: 100%;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-size: contain;
+                        }
+                    }
+
+                    .rules {
+                        width: 100%;
+                        flex: 0 0 auto;
+                    }
+
+                    .flavour {
+                        width: 100%;
+                        height: 100%;
+                        flex: 0 1 auto;
+                    }
+                }
+            }
+        }
+
+        // The type line and wisdom cost listed along the bottom.
+        .card-contents-lower {
+            width: 100%;
+            height: 35rem;
+            flex: 0 0 auto;
+
+            display: flex;
+            flex-flow: row;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+
+<div class="background-image"></div>
+
+<div class="contents">
+    <header>
+        <h3>{{ c.room | default:c.character }}</h3>
+        <p>For {{ c.threshold }} points of searching</p>
+    </header>
+
+    <div class="description block">
+        {% for line in c.description %}
+            <p class="line">{{ line | safe }}</p>
+        {% endfor %}
+    </div>
+</div>

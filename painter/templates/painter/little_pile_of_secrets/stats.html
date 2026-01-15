@@ -1,0 +1,42 @@
+{% load index %}
+
+<header>
+    <h3>{{ name }}</h3>
+    <p>Stats and Abilities</p>
+</header>
+
+<div class="stats block">
+    <div class="row">
+        <div class="name">Brawn</div>
+        <div class="value">{{ c.brawn }}</div>
+    </div>
+    <div class="row">
+        <div class="name">Willpower</div>
+        <div class="value">{{ c.willpower }}</div>
+    </div>
+    <div class="row">
+        <div class="name">Discovery</div>
+        <div class="value">{{ c.discovery }}</div>
+    </div>
+    <div class="row">
+        <div class="name">Constitution</div>
+        <div class="value">{{ c.constitution }}</div>
+    </div>
+</div>
+
+<div class="abilities block">
+    {% for ability in c.ability_names %}
+        {% with loop_index=forloop.counter|add:"-1" %}
+            <div class="single-ability block">
+                <div class="name-wrapper">
+                    <h4>{{ ability }}</h4>
+                    <span>{{ c.ability_types | index:loop_index }}</span>
+                </div>
+
+                <div class="effect">
+                    {{ c.ability_effects | index:loop_index }}
+                </div>
+            </div>
+        {% endwith %}
+    {% endfor %}
+</div>
