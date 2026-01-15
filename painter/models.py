@@ -1,9 +1,12 @@
+from pathlib import Path
+
 from django.core.validators import MinValueValidator
 from django.conf import settings
 from django.db import models
 
 
 GENERATOR_CHOICES = [(g["key"], g["name"]) for g in settings.GENERATORS.values()]
+USER_HOME_DIRECTORY = str(Path.home())
 
 
 class Card(models.Model):
@@ -34,7 +37,7 @@ class CachedFilePath(models.Model):
     last_used = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.path
+        return self.path.replace(USER_HOME_DIRECTORY, "~")
     
     class Meta:
         ordering = ["-last_used"]

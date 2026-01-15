@@ -30,8 +30,8 @@ def validate_xlsx_path(file_path):
 
 
 def get_cached_paths():
-    paths = CachedFilePath.objects.values_list("path", flat=True)
-    paths = [(path, path) for path in paths]
+    paths = CachedFilePath.objects.all()
+    paths = [(path.path, str(path)) for path in paths]
     return [(EMPTY_OLD_PATH_VALUE, "Enter a new path"), *paths]
 
 
@@ -51,6 +51,7 @@ class SelectGeneratorForm(forms.Form):
     )
 
     new_file_path = forms.CharField(
+        widget=forms.Textarea,
         required=False,
         label="...or enter a new file path (.xlsx)",
         label_suffix="",

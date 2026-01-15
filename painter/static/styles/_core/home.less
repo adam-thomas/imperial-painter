@@ -33,11 +33,14 @@
 
             #id_generator, #id_old_file_path {
                 font-size: 12rem;
-                word-break: break-all;
 
                 display: flex;
                 flex-flow: column;
                 gap: 5rem;
+            }
+
+            #id_old_file_path {
+                word-break: break-all;
             }
 
             // The file path selection.
@@ -45,6 +48,15 @@
                 display: flex;
                 flex-flow: column;
                 gap: 10rem;
+
+                textarea {
+                    width: 100%;
+                    height: 100rem;
+                    padding: 5rem;
+
+                    font-size: 12rem;
+                    word-wrap: break-all;
+                }   
             }
 
             .errorlist {
