@@ -67,20 +67,39 @@ TEST_RUNNER = "painter.tests.runner.TestRunner"
 # Imperial Painter settings
 DEFAULT_IMPORTER = "painter.importers.import_cards"
 GENERATORS = {
-    "test": {
-        "key": "test",
+    "_test": {
+        "key": "_test",
         "name": "Test cards",
+        # "hidden": True,
+    },
+    "bfg": {
+        "key": "bfg",
+        "name": "Battlefleet Gothic",
+    },
+    "killteam": {
+        "key": "killteam",
+        "name": "Kill-Team",
     },
     "laundry": {
         "key": "laundry",
         "name": "The Laundry Files RPG",
         "importer": "painter.importers.import_laundry",
     },
+    "ten_metres": {
+        "key": "ten_metres",
+        "name": "Ten Metres and Closing",
+    },
+    "murder_mystery": {
+        "key": "murder_mystery",
+        "name": "The Curse of Pendleton Manor",
+    },
+    "training_montage": {
+        "key": "training_montage",
+        "name": "Training Montage",
+    },
+    "wraithsight": {
+        "key": "wraithsight",
+        "name": "Wraithsight",
+    },
     # TODO
 }
-
-IP_DATA_FILES = [
-    os.path.join(BASE_DIR, "Test Cards.xlsx"),
-    os.path.join(BASE_DIR, "Test Cards.xlsx"),
-]
-IP_IMPORTER = "painter.importers.import_cards"

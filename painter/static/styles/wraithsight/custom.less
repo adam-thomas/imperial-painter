@@ -1,0 +1,152 @@
+/* Add your own custom CSS here, and it'll be picked up by the painter. */
+
+body {
+    font-family: "Garamond";
+}
+
+.splash-colour { color: #67B354; }
+.light-grey { color: #d0d0d0; }
+
+.splash-background { background-color: #67B354; }
+.light-shading { background-color: #d9d9d9; }
+
+.full-card {
+    .contents {
+        height: 100%;
+        width: 100%;
+
+        font-size: 9rem;
+
+        display: flex;
+        flex-flow: column;
+        gap: 2rem;
+
+        & > * {
+            width: 100%;
+        }
+
+        h3 {
+            font-family: "DM Serif Display";
+            padding: 3rem;
+
+            font-size: 15rem;
+            font-weight: bold;
+
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+
+            .icon {
+                color: #c0c0c0;
+                background-color: #222222;
+                min-width: 20rem;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .type {
+            text-transform: uppercase;
+            font-style: italic;
+            font-family: "DM Serif Display";
+            font-weight: bold;
+
+            padding-left: 2em;
+            letter-spacing: 1px;
+        }        
+        
+        .stats {
+            padding-top: 2rem;
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 8rem;
+                
+                .header-row {
+                    color: #c0c0c0;
+                    background-color: #222222;
+                    padding: 1rem 0;
+
+                    font-family: "Barlow";
+                    font-weight: bold;
+                }
+            
+                th, td {
+                    text-align: center;
+                    padding: 1rem 0;
+                }
+            }
+
+            &#weapons {
+                padding-top: 5rem;
+
+                table {
+                    th:first-of-type, td:first-of-type {
+                        text-align: left;
+                        padding-left: 2rem;
+                    }
+                }
+
+                .text {
+                    padding: 2rem 10rem 0 10rem;
+                }
+            }
+        }
+        
+        .abilities {
+            padding-top: 5rem;
+
+            .header-row {
+                font-family: "DM Serif Display";
+                font-weight: bold;
+                padding: 1rem 0;
+
+                color: #222222;
+                border-bottom: 2px solid #222222;
+
+                background: linear-gradient(90deg, fade(#67B354, 25%) 0%, fade(#67B354, 25%) 75%, fade(#67B354, 50%) 100%);
+
+                span {
+                    padding-left: 5rem;
+                    font-size: 10rem;
+                }
+            }
+        }
+        
+        .text {
+            padding-left: 3rem;
+            padding-right: 3rem;
+            font-size: 8rem;
+
+            ul {
+                padding-left: 0rem;
+                padding-right: 5rem;
+                list-style-type: none;
+                
+                li {
+                    /* Fake a hanging indent. */
+                    margin-left: 5rem;
+                    text-indent: -5rem;
+
+                    &:not(:last-of-type) {
+                        padding-bottom: 2rem;
+                    }
+                }
+            }
+
+            .entry-name {
+                font-weight: bold;
+            }
+        }
+        
+        .flavour {
+            font-style: italic;
+            position: absolute;
+            bottom: 10rem;
+        }
+    }
+}
+

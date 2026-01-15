@@ -1,0 +1,114 @@
+{% load index %}
+
+<div class="contents">
+    <h3 class="splash-background">{% block icon %}{% endblock icon %}&nbsp;&nbsp;{{ name }}</h3>
+    <div class="type splash-colour">{% block type_line %}{{ c.type }}{% endblock type_line %}</div>
+
+    <div id="core-stats" class="stats">
+        <table style="border-collapse:collapse">
+            <tr class="header-row"><th>Skill</th><th>Evasion</th><th>Armour</th><th>Resilience</th><th>Essence</th></tr>
+            {% block unit_stats %}
+                <tr class="light-shading">
+                    <td>{{ c.skill }}</td>
+                    <td>{{ c.evasion }}</td>
+                    <td>{{ c.armour }}</td>
+                    <td>{{ c.resilience }}</td>
+                    <td>{{ c.essence }}</td>
+                </tr>
+            {% endblock unit_stats %}
+        </table>
+    </div>
+
+    <div id="weapons" class="stats">
+        <table style="border-collapse:collapse">
+            <tr class="header-row"><th>Weapon</th><th>Type</th><th>AR</th><th>Strength</th><th>Special</th></tr>
+            {% block weapon_stats %}
+                {% for weapon in c.weapon %}
+                    <tr class="light-shading">
+                        <td><b>{{ weapon }}</b></td>
+                        <td>{{ c.weapon_type|index:forloop.counter0 }}</td>
+                        <td>{{ c.attack_rate|index:forloop.counter0 }}</td>
+                        <td>{{ c.strength|index:forloop.counter0 }}</td>
+                        <td>{{ c.special|index:forloop.counter0 }}</td>
+                    </tr>
+                {% endfor %}
+            {% endblock weapon_stats %}
+        </table>
+        <div class="text">
+            {% block weapon_special_rules %}
+                <ul>
+                    {% for special_rule in c.special %}
+                        {% if c.special_text|index:forloop.counter0 %}
+                            <li>
+                                <span class="entry-name">{{ special_rule }}:</span>
+                                <span>{{ c.special_text|index:forloop.counter0|safe }}</span>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endblock weapon_special_rules %}
+        </div>
+    </div>
+
+    {% if c.ability_names %}
+        <div id="abilities" class="abilities">
+            <div class="header-row"><span>Abilities</span></div>
+            <div class="text">
+                {% block abilities %}
+                    <ul>
+                        {% for ability_name in c.ability_names %}
+                            <li>
+                                <span class="entry-name">{{ ability_name }}{% if c.ability_text|index:forloop.counter0 %}:</span>
+                                <span>{{ c.ability_text|index:forloop.counter0|safe }}{% endif %}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endblock abilities %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if c.spell_names %}
+        <div id="spells" class="abilities">
+            <div class="header-row"><span>Spells</span></div>
+            <div class="text">
+                {% block spells %}
+                    <ul>
+                        {% for spell in c.spell_names %}
+                            <li>
+                                <span class="entry-name">{{ spell }} [Cost {{ c.spell_costs|index:forloop.counter0 }}]:</span>
+                                <span>{{ c.spell_effects|index:forloop.counter0|safe }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endblock spells %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if c.attack_spell_names %}
+        <div id="attack-spells" class="abilities">
+            <div class="header-row"><span>Attack Spells</span></div>
+            <div class="text">
+                {% block attack_spells %}
+                    <ul>
+                        {% for attack_spell in c.attack_spell_names %}
+                            <li>
+                                <span class="entry-name">{{ attack_spell }} [Cost {{ c.attack_spell_costs|index:forloop.counter0 }}]:</span>
+                                <span>{{ c.attack_spell_effects|index:forloop.counter0|safe }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endblock attack_spells %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if c.flavour_text %}
+        <div class="flavour text">
+            {% block flavour_text %}
+                {{ c.flavour_text|safe }}
+            {% endblock flavour_text %}
+        </div>
+    {% endif %}
+</div>

@@ -8,12 +8,6 @@ from django.views.generic import FormView, ListView
 from . import models
 from .forms import SelectGeneratorForm, EMPTY_OLD_PATH_VALUE
 
-# settings.IP_IMPORTER needs to point to a management command.
-# There are two default ones:
-#  * painter.importers.import_cards
-#  * painter.importers.import_laundry
-ip_importer = importlib.import_module(settings.IP_IMPORTER)
-
 
 class Home(FormView):
     template_name = "painter/_core/home.html"
@@ -40,18 +34,28 @@ class CardDisplay(ListView):
         context["generator"] = self.generator_key
         return context
 
-    def load_importer_class(self, generator_key):
-        module_path = settings.GENERATORS[generator_key].get("importer", settings.DEFAULT_IMPORTER)
+    def load_importer_class(self):
+        """
+        Load an importer from a module specified in the generator's settings, or the
+        default one if not.
+        """
+        module_path = settings.GENERATORS[self.generator_key].get("importer", settings.DEFAULT_IMPORTER)
         module = importlib.import_module(module_path)
         return module.CardImporter
     
     def get(self, request, *args, **kwargs):
+        """
+        Retrieve a generator key and a base64-encoded file path from the URL, look up
+        a card importer for the given generator, and run it on those files.
+        This fills the database with Card objects drawn from the file, and we then
+        display them to the user using the normal ListView functionality.
+        """
         self.generator_key = kwargs["generator"]
         b64_file_path = kwargs["b64_file_path"]
 
         file_path = base64.b64decode(b64_file_path.encode("ascii")).decode("utf-8")
 
-        importer_class = self.load_importer_class(self.generator_key)
+        importer_class = self.load_importer_class()
         importer = importer_class(self.generator_key, filenames=[file_path])
         importer.run_import()
 
