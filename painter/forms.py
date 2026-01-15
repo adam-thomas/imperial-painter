@@ -1,13 +1,12 @@
 from pathlib import Path
 
 from django import forms
-from django.conf import settings
 from django.core.exceptions import ValidationError
 
-from .models import CachedFilePath
+from .models import CachedFilePath, GENERATOR_CHOICES
 
 
-GENERATOR_CHOICES = [(g["key"], g["name"]) for g in settings.GENERATORS.values()]
+# We need a rogue value for the custom path selection that's not actually None.
 EMPTY_OLD_PATH_VALUE = "-"
 
 

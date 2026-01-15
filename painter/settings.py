@@ -79,7 +79,6 @@ GENERATORS = {
     # TODO
 }
 
-
 IP_DATA_FILES = [
     os.path.join(BASE_DIR, "Test Cards.xlsx"),
     os.path.join(BASE_DIR, "Test Cards.xlsx"),

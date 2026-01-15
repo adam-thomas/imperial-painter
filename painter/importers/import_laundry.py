@@ -136,12 +136,14 @@ class CardImporter(BaseCardImporter):
             Card(
                 name=name,
                 template_name="stats.html",
+                generator_key=self.generator_key,
                 quantity=1,
                 data=card_data,
             ),
             Card(
                 name=name,
                 template_name="skills.html",
+                generator_key=self.generator_key,
                 quantity=1,
                 data=card_data,
             ),
@@ -151,6 +153,7 @@ class CardImporter(BaseCardImporter):
             cards.append(Card(
                 name=name,
                 template_name="spells.html",
+                generator_key=self.generator_key,
                 quantity=1,
                 data=card_data,
             ))

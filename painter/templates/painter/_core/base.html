@@ -12,8 +12,9 @@
 
     {% comment %} {% include "custom/headers.html" %} {% endcomment %}
 
-    <link rel="stylesheet/less" type="text/css" href="{% static "styles/base.less" %}">
-    <link rel="stylesheet/less" type="text/css" href="{% static "styles/custom.less" %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static "styles/_core/base.less" %}">
+    {% block custom_styles %}{% endblock %}
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
 </head>
 

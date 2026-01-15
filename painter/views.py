@@ -16,7 +16,7 @@ ip_importer = importlib.import_module(settings.IP_IMPORTER)
 
 
 class Home(FormView):
-    template_name = "painter/home.html"
+    template_name = "painter/_core/home.html"
     form_class = SelectGeneratorForm
 
     def form_valid(self, form):
@@ -33,20 +33,26 @@ class Home(FormView):
 
 class CardDisplay(ListView):
     model = models.Card
-    template_name = "painter/card_display.html"
+    template_name = "painter/_core/card_display.html"
 
-    def load_importer(self, generator_key):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["generator"] = self.generator_key
+        return context
+
+    def load_importer_class(self, generator_key):
         module_path = settings.GENERATORS[generator_key].get("importer", settings.DEFAULT_IMPORTER)
         module = importlib.import_module(module_path)
-        return module.CardImporter()
+        return module.CardImporter
     
     def get(self, request, *args, **kwargs):
-        generator_key = kwargs["generator"]
+        self.generator_key = kwargs["generator"]
         b64_file_path = kwargs["b64_file_path"]
 
         file_path = base64.b64decode(b64_file_path.encode("ascii")).decode("utf-8")
 
-        importer = self.load_importer(generator_key)
-        importer.handle(filenames=[file_path])
+        importer_class = self.load_importer_class(self.generator_key)
+        importer = importer_class(self.generator_key, filenames=[file_path])
+        importer.run_import()
 
         return super().get(request, *args, **kwargs)

@@ -12,15 +12,11 @@ class CardImporter:
     Clears the database of cards, then fills it with the contents of one or
     more specified XLSX files.
     """
+    def __init__(self, generator_key, filenames):
+        self.generator_key = generator_key
+        self.filenames = filenames
 
-    def ensure_extension(self, filename, extension):
-        """Tag a filename with a given file format if it doesn't have one already."""
-        extension = "." + extension
-        if filename.endswith(extension):
-            return filename
-        return filename + extension
-
-    def load_all_worksheets(self, filenames, verbosity=0):
+    def load_all_worksheets(self, verbosity=0):
         """
         Open a given series of Excel files and return all their worksheets.
 
@@ -29,26 +25,23 @@ class CardImporter:
         """
         all_sheets = []
 
-        for filename in filenames:
-            filename = self.ensure_extension(filename, "xlsx")
-            if verbosity:
-                print("Loading {}".format(filename))
+        for filename in self.filenames:
+            print("Loading {}".format(filename))
 
             workbook = load_workbook(
                 filename=filename,
-                # read_only=True,  # read_only mode causes sharing violations...
-                data_only=True,  # Load the values computed by formulae, not the formulae
-                keep_vba=False,  # Throw away any VBA scripting
+                # read_only=True,  # Apparently read_only mode causes sharing violations.
+                data_only=True,  # Load the values computed by formulae, not the formulae.
+                keep_vba=False,  # Throw away any VBA scripting.
             )
 
             valid_sheets = [w for w in workbook.worksheets if w.title[0] != "@"]
 
             all_sheets += valid_sheets
 
-        if verbosity:
-            titles = [w.title for w in all_sheets]
-            titles = ', '.join(titles)
-            print("Loading worksheets: {}".format(titles))
+        titles = [w.title for w in all_sheets]
+        titles = ', '.join(titles)
+        print("Loading worksheets: {}".format(titles))
 
         return all_sheets
 
@@ -233,18 +226,19 @@ class CardImporter:
             Card(
                 name=name,
                 template_name=template.strip(),
+                generator_key=self.generator_key,
                 quantity=quantity,
                 data=card_data,
             )
             for template in template_list
         ]
 
-    def handle(self, filenames, *args, **options):
+    def run_import(self):
         # Clear all card data before we go any further.
         Card.objects.all().delete()
 
         # Import!
-        worksheets = self.load_all_worksheets(filenames)
+        worksheets = self.load_all_worksheets()
         python_data = []
         for sheet in worksheets:
             python_data += self.convert_to_python(sheet)
