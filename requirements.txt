@@ -15,5 +15,5 @@ flake8==7.3.0
 flake8_import_order==0.19.2
 incuna-test-utils==8.0.0
 pep8==1.7.1
-Werkzeug==3.1.4
+Werkzeug==3.1.5
 
