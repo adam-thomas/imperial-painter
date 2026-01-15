@@ -1,0 +1,19 @@
+{% extends "painter/laundry/base.html" %}
+
+{% block contents %}
+    <div class="skill-block stat-block">
+        <div class="skill-column">
+            {% for skill in c.skills %}
+                <div class="stat-entry">
+                    <div class="stat-name">{{ skill.name }}</div>
+                    <div class="value">{{ skill.value }}</div>
+                </div>
+
+                {% if forloop.counter == 11 or forloop.counter == 22 %}
+                    </div>
+                    <div class="skill-column">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock contents %}

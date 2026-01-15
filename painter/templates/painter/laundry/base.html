@@ -1,0 +1,16 @@
+{% load index %}
+
+<div class="full-card">
+    <div class="card-background"></div>
+    <div class="card-overlay">
+        <div class="character-name">
+            <div class="name">{{ name }}</div>
+            <div class="position">{{ c.position }}</div>
+        </div>
+
+        <div class="contents">
+            {% block contents %}
+            {% endblock contents %}
+        </div>
+    </div>
+</div>

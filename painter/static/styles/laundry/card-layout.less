@@ -1,0 +1,70 @@
+/* ----------------------------------------------------------------------- */
+/* Structure */
+/* ----------------------------------------------------------------------- */
+.full-card {
+    // Set the font here for scaling purposes.
+    font-family: "Sarabun", sans-serif;
+    font-size: 10rem;
+
+    // The full card contains two divs layered on top of each other - one for the background
+    // and one for the card's contents.
+    // Use position: absolute so they don't get in each other's way.
+    .card-background {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        box-shadow: 0 0 0 11rem inset;
+        color: @grey;
+    }
+
+    .card-overlay {
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: flex;
+        flex-flow: column;
+
+        .character-name {
+            height: 40rem;
+            width: 100%;
+            flex: 0 0 auto;
+            padding: 3rem;
+
+            background-color: @grey;
+            font-family: "ZCOOL XiaoWei";
+
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+
+            .name {
+                font-size: 20rem;
+                font-weight: bold;
+            }
+            .position {
+                font-size: 11rem;
+            }
+        }
+
+        .contents {
+            height: 100%;
+            width: 100%;
+            flex: 0 1 auto;
+
+            padding: 1rem 11rem 11rem 11rem;
+
+            display: flex;
+            flex-flow: column;
+        }
+    }
+}

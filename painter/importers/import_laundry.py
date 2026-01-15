@@ -135,14 +135,14 @@ class CardImporter(BaseCardImporter):
         cards = [
             Card(
                 name=name,
-                template_name="stats.html",
+                template_name="stats",
                 generator_key=self.generator_key,
                 quantity=1,
                 data=card_data,
             ),
             Card(
                 name=name,
-                template_name="skills.html",
+                template_name="skills",
                 generator_key=self.generator_key,
                 quantity=1,
                 data=card_data,
@@ -152,7 +152,7 @@ class CardImporter(BaseCardImporter):
         if card_data["spells"] or card_data["weapons"]:
             cards.append(Card(
                 name=name,
-                template_name="spells.html",
+                template_name="spells",
                 generator_key=self.generator_key,
                 quantity=1,
                 data=card_data,

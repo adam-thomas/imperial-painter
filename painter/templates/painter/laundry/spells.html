@@ -1,0 +1,33 @@
+{% extends "painter/laundry/base.html" %}
+
+{% block contents %}
+    {% for spell in c.spells %}
+        <div class="spell-entry">
+            <div class="header">
+                <div class="name">{{ spell.spell }}</div>
+                <div class="level">Level {{ spell.level }} Spell</div>
+            </div>
+
+            <div class="details">
+                <div class="detail">Source: <span class="value">{{ spell.source }}</span></div>
+                <div class="detail">Casting difficulty: <span class="value">{{ spell.casting_difficulty }}</span></div>
+                <div class="description">{{ spell.description }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% for weapon in c.weapons %}
+        <div class="weapon-entry">
+            <div class="header">
+                <div class="name">{{ weapon.weapon }}</div>
+                <div class="level">Weapon</div>
+            </div>
+
+            <div class="details">
+                <div class="detail">Rate of Fire: <span class="value">{{ weapon.rof }}</span></div>
+                <div class="detail">Damage: <span class="value">{{ weapon.damage }}</span></div>
+                <div class="description">{{ weapon.notes }}</div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock contents %}

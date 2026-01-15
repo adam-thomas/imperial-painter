@@ -70,7 +70,6 @@ GENERATORS = {
     "_test": {
         "key": "_test",
         "name": "Test cards",
-        # "hidden": True,
     },
     "bfg": {
         "key": "bfg",
@@ -84,6 +83,10 @@ GENERATORS = {
         "key": "laundry",
         "name": "The Laundry Files RPG",
         "importer": "painter.importers.import_laundry",
+    },
+    "little_pile_of_secrets": {
+        "key": "little_pile_of_secrets",
+        "name": "Little Pile of Secrets",
     },
     "ten_metres": {
         "key": "ten_metres",
@@ -101,5 +104,4 @@ GENERATORS = {
         "key": "wraithsight",
         "name": "Wraithsight",
     },
-    # TODO
 }
