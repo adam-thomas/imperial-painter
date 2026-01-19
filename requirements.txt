@@ -1,19 +1,6 @@
-# Actual requirements
-# TODO: use a local egg install and have the list in setup.py be the single source of truth
 dj-database-url==3.1.0
 Django==6.0.1
 django-extensions==4.1
 lxml==6.0.2
 openpyxl==3.1.5
 psycopg2-binary==2.9.11
-
-# Development help
-# TODO: tidy these up, modernise testing approach, remove coverage etc
-colour-runner==0.1.1
-factory_boy==3.3.3
-flake8==7.3.0
-flake8_import_order==0.19.2
-incuna-test-utils==8.0.0
-pep8==1.7.1
-Werkzeug==3.1.5
-

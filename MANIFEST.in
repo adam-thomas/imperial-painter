@@ -1,3 +1,0 @@
-include painter/templates/painter/*.html
-include painter/templatetags/*.py
-include painter/static/styles/*.less

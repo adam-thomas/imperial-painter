@@ -3,6 +3,8 @@
 {% load index %}
 {% load static %}
 
+{% block html_styles %}class="card-display"{% endblock %}
+
 {% block custom_styles %}
     {% with "styles/"|add:generator_key|add:"/custom.less" as custom_styles_url %}
         <link rel="stylesheet/less" type="text/css" href="{% static custom_styles_url %}" />

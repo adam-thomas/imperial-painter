@@ -2,44 +2,28 @@
 
 A way of generating prototype cards for testing tabletop games!
 
-Creates printable HTML pages using Django and a bit of CSS.
+Creates printable HTML pages using Django and Less/CSS.
 
 Named for the Magic deck, [Imperial Painter](http://www.mtgtop8.com/event?e=6724&d=238610).
 
-## Running the test app
+## Running the app
 
-The test app is a basic Django app that allows you to see `imperial-painter` in action. To install it, use the same steps you would for a normal Django project:
+To install `imperial-painter`, use the same steps you would for a normal Django project:
 
-* Create a Python 3 virtual environment [using the instructions here](https://docs.python.org/3/library/venv.html).
-* Activate it with `source bin/activate`.
-* Install requirements using `pip install -r requirements.txt`.
 * Ensure Postgres is running ([instructions are here](https://www.postgresql.org/) if you need to set it up).
-* Create a database in `psql` with `create database painter;`.
-* Run migrations with `python manage.py migrate`.
+* Use `make install` to create a database in Postgres, create a Python virtual environment, and install dependencies.
+* Launch the application using `make run`.
 
-Once it's set up, you can run it using `make run` or `python manage.py runserver`.
+Go to `localhost:8000` in your browser. You'll see a list of generators for different games, and can click through any of them to select a file on your file system. Hitting Generate after that will produce the cards, and you can print them from your browser. Each printed page will contain a 3x3 grid of cards, sized to match standard Magic cards/sleeves; I recommed cutting them out and sliding them into sleeves over the top of existing spares/tokens to produce your prototypes.
 
-Go to `127.0.0.1:8000` in your browser, and you should see some very rudimentary cards! Hit Print in your browser to turn them into real-life prototypes.
+## Spreadsheet API
 
-## Using Painter yourself
+Imperial Painter imports card data from `.xlsx` files.
 
-There are several components to Painter's API. Broadly, you need to:
-
-* Create one or more Excel files (`.xlsx`) that contain your card data. This should follow a specific format expected by the importer.
-* Add `painter` to your Django app's `INSTALLED_APPS`.
-* Set the `IP_IMPORTER` and `IP_DATA_FILES` settings in your `settings.py`.
-* Add `painter.urls` to a URLconf somewhere in your project.
-* Add one or more [Less files](http://lesscss.org/) (normal CSS files with a .less extension are also valid) to a static folder. Painter expects an entry point file under `styles/custom.less`; this should import any other Less files you've written.
-* Add one or more Django templates under `templates/custom`.
-
-The `test_app` is a small example of all of these steps - poking through that should help my explanations make sense.
-
-### Excel API
-
-This varies based on the importer. The base `import_cards` expects a single table, filling an entire sheet, with the following columns:
+The contents vary based on the importer and the needs of the particular generator being used. The base `import_cards` (used for most generators) expects a single table, filling an entire sheet, with the following columns:
 
 * `Name` - the name of a card. Uniqueness of names is not enforced.
-* `Template` - the name of a Django template file, without the `.html` or the file path leading up to it. For instance, a `Template` entry of `base` would resolve to `templates/custom/base.html`.
+* `Template` - the name of a Django template file, without the `.html` or the file path leading up to it. For instance, a `Template` entry of `base` for a generator called `my_generator` would resolve to `templates/painter/[my_generator]/base.html`.
     * You can include multiple template names this way, comma-separated - e.g. `character,items`.
     * Any whitespace around template names is removed.
 * `Quantity` - optional. This allows you to print a card multiple times.
@@ -49,24 +33,23 @@ This varies based on the importer. The base `import_cards` expects a single tabl
 
 Multiple files can be input, and each file can have any number of sheets.
 
-As an example, see [Test Cards.xlsx](https://github.com/adam-thomas/imperial-painter/blob/master/Test%20Cards.xlsx).
+As an example, see [painter/tests/example_cards.xlsx](https://github.com/adam-thomas/imperial-painter/blob/master/painter/tests/Test%20Cards.xlsx). This file is compatible with the `Test Cards` generator, if you want to see it in action.
 
-### Django settings API
+## Adding custom generators
 
-Imperial Painter needs two variables to be set in your Django settings:
+There are several components to Painter's API. To make a new generator, you need to:
 
-* `IP_DATA_FILES` - a list of absolute paths to `.xlsx` files to import.
-* `IP_IMPORTER` - an import path to a management command that will load the `.xlsx` files in question.
+* Create one or more Excel files (`.xlsx`) that contain your card data. This should follow a specific format expected by the importer.
+* Decide on a generator name, and add it to the `GENERATORS` dictionary in `settings.py`.
+* Create a Django templates folder under `painter/templates/painter/[generator]/`.
+    * Add any Django template files you need here. Their names can be arbitrary (see below).
+    * Additionally, add a `fonts.html` template. This can be empty, but is also a place where you can add any HTML headers that import fonts. Painter is set up expecting to use Google Fonts, but any other similar system works.
+* Create a styling folder at `painter/static/styles/[generator]/`. This expects [Less files](http://lesscss.org/).
+    * Add a `custom.less` file to this folder as your entry point, plus any number of other Less files. Any other files should be `@import`ed into `custom.less`.
+    * If you don't want to use Less, you can write normal CSS in your `custom.less` file.
+* If you need other static assets, add them to the `static` folder somewhere sensible and import them directly in your Django templates. I've conventionally used `static/images/[generator]/` as a location for images.
 
-The example from `test_app` is:
-
-```python
-IP_DATA_FILES = [
-    os.path.join(BASE_DIR, 'Test Cards.xlsx'),
-    os.path.join(BASE_DIR, 'Test Cards.xlsx'),
-]
-IP_IMPORTER = 'painter.management.commands.import_cards'
-```
+The other generators can provide examples of the structure and things to copy-and-paste if you need.
 
 ### Less/CSS API
 
@@ -74,7 +57,9 @@ Add a `styles/custom.less` file to a static files directory.
 
 The contents of each card are wrapped in a `<div class="template-[template name] full-card">`. All of your styles should be applied within that class.
 
-Less allows you to import other Less files, so you can split your styles across multiple files if you need despite the singular entry point. If you're unfamiliar with Less, raw CSS is perfectly valid Less, so you can use that too (just make sure it has the `.less` file extension).
+For fixed sizes, use `rem` instead of `px` or any other measurement. Painter sets a base `font-size` of `1px` across the page, so your `rem` sizes will normally equal the pixel count you want.
+
+Less allows you to import other Less files, so you can split your styles across multiple files if you need despite the singular entry point. If you're unfamiliar with Less, raw CSS is perfectly valid Less, so you can use that too (just make sure the file is still named `custom.less`).
 
 ### Django template API
 
