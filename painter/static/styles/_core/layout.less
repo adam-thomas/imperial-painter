@@ -16,6 +16,12 @@ html {
         margin: 0;
         padding: 0;
     }
+
+    // Zoom in 150% on the card display page to make the cards more readable.
+    // We'll override this and set it back to 1px when printing.
+    &.card-display {
+        font-size: 1.5px;
+    }
 }
 
 body {
@@ -30,6 +36,11 @@ body {
     .spoiler {
         page-break-inside: avoid;
         page-break-after: always;
+    }
+
+    // Reset the zoom-in on the card display page.
+    html.card-display {
+        font-size: 1px;
     }
 }
 
@@ -48,6 +59,9 @@ body {
     display: flex;
     flex-flow: column;
     align-items: flex-start;
+
+    // "Zoom in" 1.5x to make the cards more readable on-screen.
+    font-size: 1.5px;
 
     .row {
         width: auto;

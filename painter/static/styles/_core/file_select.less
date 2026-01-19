@@ -1,8 +1,6 @@
 #select-file {
     width: 100%;
-    height: 100%;
-
-    font-size: 16rem;   
+    height: 100%; 
 
     display: flex;
     flex-flow: column;
@@ -18,36 +16,61 @@
         flex-flow: row;
         gap: 20rem;
 
+        // Each form field is grouped under a <div>, with no CSS class named on it.
+        // In general, the lack of CSS class names on Django forms means we need
+        // to use some hacky-looking selectors here to find the right elements.
         & > div {
             width: 100%;
             flex: 0 1 auto;
 
             padding: 20rem;
-            background-color: #c0c0c0;
+            background-color: #d0d0d0;
             border-radius: 20rem;
 
-            // Radio selects.
-            legend {
-                margin-bottom: 10rem;
+            // The titles above each field.
+            legend, label[for=id_new_file_path] {
+                font-size: 20rem;
+                margin-bottom: 16rem;
             }
 
-            #id_generator, #id_old_file_path {
-                font-size: 12rem;
-
+            // The list of old file path radio buttons.
+            #id_old_file_path {
                 display: flex;
                 flex-flow: column;
-                gap: 5rem;
+                gap: 8rem;
+
+                // Each radio button item (a <label>) is wrapped in a <div>.
+                & > div {
+                    cursor: pointer;
+                    padding: 4rem 8rem;
+                    border-radius: 4rem;
+
+                    &:hover {
+                        background-color: #67B354;
+                    }
+
+                    label {
+                        // Expand the label to fit its container, so that clicking anywhere in
+                        // the <div> activates the radio button.
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+
+                        // Wrap the file paths arbitrarily rather than hoping for spaces.
+                        font-size: 16rem;
+                        word-break: break-all;
+
+                        // Restate the cursor: pointer here, because otherwise it's overridden
+                        // with a standard or text-selection cursor.
+                        cursor: pointer;
+                    }
+                }
             }
 
-            #id_old_file_path {
-                word-break: break-all;
-            }
-
-            // The file path selection.
+            // The file path entry.
             &:last-child {
                 display: flex;
                 flex-flow: column;
-                gap: 10rem;
 
                 textarea {
                     width: 100%;
@@ -59,9 +82,10 @@
                 }   
             }
 
+            // Errors on any field.
             .errorlist {
                 list-style: none;
-                font-size: 10rem;
+                font-size: 12rem;
                 font-weight: bold;
                 color: #9C1A02;
             }
@@ -69,9 +93,10 @@
     }
 
     button#generate {
-        padding: 10rem 30rem;
-        border-radius: 10rem;
+        padding: 16rem 48rem;
+        border-radius: 16rem;
         color: #ffffff;
+        font-size: 20rem;
     }
 
     &:invalid {
