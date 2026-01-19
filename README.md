@@ -33,7 +33,7 @@ The contents vary based on the importer and the needs of the particular generato
 
 Multiple files can be input, and each file can have any number of sheets.
 
-As an example, see [painter/tests/example_cards.xlsx](https://github.com/adam-thomas/imperial-painter/blob/master/painter/tests/Test%20Cards.xlsx). This file is compatible with the `Test Cards` generator, if you want to see it in action.
+As an example, see [painter/tests/example_cards.xlsx](https://github.com/adam-thomas/imperial-painter/blob/master/painter/tests/example_cards.xlsx). This file is compatible with the `Test Cards` generator, if you want to see it in action.
 
 ## Adding custom generators
 
