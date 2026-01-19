@@ -11,10 +11,10 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = (
     "painter",
-    "test_app",
 
     "django_extensions",
 
+    'django.contrib.admin',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.messages",
@@ -22,15 +22,19 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
 )
 
-MIDDLEWARE_CLASSES = (
-    "django.middleware.common.CommonMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
+MIDDLEWARE = (
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 SECRET_KEY = "Django requires this to be set, but this project does not make use of it"
 
-ROOT_URLCONF = "test_app.urls"
+ROOT_URLCONF = "painter.urls"
 
 TEMPLATES = [
     {
@@ -39,6 +43,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "django.contrib.auth.context_processors.auth",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.messages.context_processors.messages",
@@ -47,7 +52,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "test_app.wsgi.application"
+WSGI_APPLICATION = "painter.wsgi.application"
 
 DATABASES = {
     "default": dj_database_url.config(
@@ -61,8 +66,6 @@ USE_TZ = False
 
 STATIC_ROOT = os.path.join(BASE_DIR, "painter/static")
 STATIC_URL = os.environ.get("STATIC_URL", "/static/")
-
-TEST_RUNNER = "painter.tests.runner.TestRunner"
 
 # Imperial Painter settings
 DEFAULT_IMPORTER = "painter.importers.import_cards"

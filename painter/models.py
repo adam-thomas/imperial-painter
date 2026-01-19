@@ -16,7 +16,7 @@ class Card(models.Model):
     generator_key = models.CharField(choices=GENERATOR_CHOICES)
     
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)], default=1)
-    data = models.JSONField(default={})
+    data = models.JSONField(default=dict)
 
     def __str__(self):
         return self.name
@@ -35,7 +35,7 @@ class Card(models.Model):
 class CachedFilePath(models.Model):
     """A previously-used file path to an .xlsx file."""
     generator_key = models.CharField(choices=GENERATOR_CHOICES)
-    path = models.FilePathField(unique=True)
+    path = models.CharField(unique=True)
     last_used = models.DateTimeField(auto_now=True)
 
     def __str__(self):
