@@ -1,0 +1,45 @@
+table.weapons {
+    width: 100%;
+
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    font-size: 7rem;
+    font-weight: bold;
+    font-family: @heading-font;
+
+    tr {
+        height: 14rem;
+        padding: 0;
+
+        td {
+            padding: 0 3rem;
+        }
+    }
+
+    thead tr, tbody tr:last-child {
+        border-bottom: 2px solid @kt-orange;
+    }
+
+    thead {
+        text-transform: uppercase;
+    }
+
+    tbody {
+        tr:nth-child(2) {
+            background-color: @kt-grey;
+        }
+
+        // Ranged/melee icons.
+        td.icon-cell {
+            height: 14rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 12rem;
+            }
+        }
+    }
+}

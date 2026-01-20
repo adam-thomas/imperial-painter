@@ -1,0 +1,32 @@
+{% load index %}
+{% load static %}
+
+<table class="weapons">
+    <thead>
+        <tr>
+            <td></td>
+            <td>Name</td>
+            <td>Atk</td>
+            <td>Hit</td>
+            <td>Dmg</td>
+            <td>WR</td>
+        </tr>
+    </thead>
+
+    <tbody>        
+        {% for name in names %}
+            {% with loop_index=forloop.counter|add:"-1" %}
+                <tr>
+                    <td class="icon-cell">
+                        <img src="{% static "images/killteam/" %}{{ types | index:loop_index }}.png" />
+                    </td>
+                    <td>{{ name }}</td>
+                    <td>{{ atks | index:loop_index }}</td>
+                    <td>{{ hits | index:loop_index }}</td>
+                    <td>{{ dmgs | index:loop_index }}</td>
+                    <td>{{ wrs | index:loop_index }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+    </tbody>
+</table>

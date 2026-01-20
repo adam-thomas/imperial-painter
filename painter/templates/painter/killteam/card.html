@@ -1,0 +1,43 @@
+{% load static %}
+
+<div class="background" style="--image:url({% static 'images/killteam/pentiments/' %}{{ c.faction|lower }}.png)"></div>
+
+<div class="contents">
+    <header>
+        <div class="pentiment">{{ name|slice:":1" }}</div>
+        <div class="rest-of-name">{{ name|slice:"1:" }}</div>
+    </header>
+
+    <div class="card-body">
+        <div class="timing">
+            {{ c.timing|default:"At any time" }}
+        </div>
+
+        <div class="effects">
+            {% for effect in c.effects %}
+                <p>{{ effect|safe }}</p>
+            {% endfor %}
+        </div>
+
+        {% if c.action_cost %}
+            <div class="action">
+                <div class="header-row">
+                    <span class="name">{{ c.action_name }}</span>
+                    <span class="cost">{{ c.action_cost }}</span>
+                </div>
+
+                <div class="body">
+                    <div class="text">{{ c.action_text|safe }}</div>
+
+                    {% if c.weapon_name %}
+                        {% include "painter/killteam/weapon_table.html" with names=c.weapon_name types=c.weapon_type atks=c.atk hits=c.hit dmgs=c.dmg wrs=c.weapon_abilities %}
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            {% if c.weapon_name %}
+                {% include "painter/killteam/weapon_table.html" with names=c.weapon_name types=c.weapon_type atks=c.atk hits=c.hit dmgs=c.dmg wrs=c.weapon_abilities %}
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

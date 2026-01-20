@@ -1,0 +1,32 @@
+
+.full-card {
+    color: @kt-dark;
+    font-size: 10rem;
+    font-family: "Saira Condensed";
+
+    position: relative;
+
+    .background, .contents {
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        height: 100%;
+        width: 100%;
+    }
+
+    .background {
+        z-index: 0;
+    }
+
+    .contents {
+        z-index: 1;
+        
+        display: flex;
+        flex-flow: column;
+    }
+
+    header, .card-body {
+        padding: 3rem 5rem;
+    }
+}

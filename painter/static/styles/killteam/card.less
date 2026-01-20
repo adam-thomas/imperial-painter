@@ -1,0 +1,56 @@
+
+.full-card.template-card {
+    .background {
+        background-image: var(--image);
+        background-size: 250rem;
+        background-position: -100rem -75rem;
+        background-repeat: no-repeat;
+
+        filter: blur(1px) opacity(20%);
+
+        &::after {
+            content: "an after element";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+
+            background-image: var(--image);
+            background-size: 400rem;
+            background-position: -20rem 120rem;
+            background-repeat: no-repeat;
+
+            filter: blur(2px) opacity(60%);
+        }
+    }
+
+    .contents {
+        header {
+            display: flex;
+            flex-flow: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .pentiment {
+                flex: 0 0 auto;
+
+                font-size: 60rem;
+                line-height: 0.75;
+                font-family: @pentiment-font;
+                color: @kt-orange;
+            }
+
+            .rest-of-name {
+                width: 100%;
+                flex: 0 1 auto;
+
+                padding-top: 2rem;
+                font-size: 13rem;
+                line-height: 1.1;
+                font-family: @proclamation-font;
+            }
+        }
+    }
+}
