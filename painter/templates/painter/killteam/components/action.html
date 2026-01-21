@@ -1,0 +1,23 @@
+
+<div class="action">
+    <div class="header-row">
+        <span class="name">{{ name }}</span>
+        <span class="cost">{{ cost }}AP</span>
+    </div>
+
+    <div class="body">
+        {% if text %}
+            <div class="text">{{ text|safe }}</div>
+        {% elif text_list %}
+            <div class="text">
+                {% for item in text_list %}
+                    {{ item|safe }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if weapon and weapon.name %}
+            {% include "painter/killteam/components/weapon_table.html" with names=weapon.weapon_name types=weapon.weapon_type atks=weapon.atk hits=weapon.hit dmgs=weapon.dmg wrs=weapon.weapon_abilities %}
+        {% endif %}
+    </div>
+</div>

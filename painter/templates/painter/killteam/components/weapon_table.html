@@ -18,7 +18,7 @@
             {% with loop_index=forloop.counter|add:"-1" %}
                 <tr>
                     <td class="icon-cell">
-                        <img src="{% static "images/killteam/" %}{{ types | index:loop_index }}.png" />
+                        <img src="{% static "images/killteam/" %}{{ types | index:loop_index | lower }}.png" />
                     </td>
                     <td>{{ name }}</td>
                     <td>{{ atks | index:loop_index }}</td>
@@ -29,4 +29,14 @@
             {% endwith %}
         {% endfor %}
     </tbody>
+
+    {% if weapon_ability_rules %}
+        <tr>
+            <td colspan="6" class="rules-text">
+                {% for ability in c.weapon_ability_rules %}
+                    <p>{{ ability|safe }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
 </table>

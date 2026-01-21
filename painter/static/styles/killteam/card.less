@@ -1,31 +1,5 @@
 
 .full-card.template-card {
-    .background {
-        background-image: var(--image);
-        background-size: 250rem;
-        background-position: -100rem -75rem;
-        background-repeat: no-repeat;
-
-        filter: blur(1px) opacity(20%);
-
-        &::after {
-            content: "an after element";
-
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-
-            background-image: var(--image);
-            background-size: 400rem;
-            background-position: -20rem 120rem;
-            background-repeat: no-repeat;
-
-            filter: blur(2px) opacity(60%);
-        }
-    }
-
     .contents {
         header {
             display: flex;
@@ -50,6 +24,37 @@
                 font-size: 13rem;
                 line-height: 1.1;
                 font-family: @proclamation-font;
+            }
+        }
+
+        .card-body {
+            .timing {
+                width: 100%;
+
+                display: flex;
+                flex-flow: column;
+                align-items: flex-start;
+
+                .label {
+                    padding: 2rem 5rem 0rem 5rem;
+                    background-color: @kt-dark;
+                    color: #ffffff;
+                    
+                    font-size: 7rem;
+                    font-family: @heading-font;
+                    text-transform: uppercase;
+                }
+
+                .description {
+                    width: 100%;
+                    padding: 1rem 5rem;
+                    border: 2px solid @kt-dark;
+                    background-color: fade(#ffffff, 50%);
+                }
+            }
+
+            .action .body {
+                font-size: 10rem;
             }
         }
     }

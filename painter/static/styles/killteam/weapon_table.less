@@ -1,23 +1,27 @@
-table.weapons {
+.full-card .card-body table.weapons {
     width: 100%;
 
     border-collapse: collapse;
     border-spacing: 0;
 
     font-size: 7rem;
-    font-weight: bold;
-    font-family: @heading-font;
 
     tr {
         height: 14rem;
         padding: 0;
 
-        td {
-            padding: 0 3rem;
+        td:not(.rules-text) {
+            padding: 0 1rem;
+            font-weight: bold;
+            font-family: @heading-font;
+        }
+
+        td.rules-text {
+            padding: 2rem;
         }
     }
 
-    thead tr, tbody tr:last-child {
+    &, thead tr {
         border-bottom: 2px solid @kt-orange;
     }
 
@@ -26,8 +30,8 @@ table.weapons {
     }
 
     tbody {
-        tr:nth-child(2) {
-            background-color: @kt-grey;
+        tr:nth-child(2n) {
+            background-color: fade(@kt-grey, 80%);
         }
 
         // Ranged/melee icons.

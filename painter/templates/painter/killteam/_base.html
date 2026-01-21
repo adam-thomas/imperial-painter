@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="background" style="--image:url({% static 'images/killteam/pentiments/' %}{{ c.faction|lower }}.png)"></div>
+
+<div class="contents">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+
+    {% block stats %}{% endblock %}
+
+    <div class="card-body">
+        {% block body %}{% endblock %}
+    </div>
+</div>
