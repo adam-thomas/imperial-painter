@@ -4,7 +4,7 @@
     border-collapse: collapse;
     border-spacing: 0;
 
-    font-size: 7rem;
+    font-size: 8rem;
 
     tr {
         height: 14rem;
@@ -12,8 +12,11 @@
 
         td:not(.rules-text) {
             padding: 0 1rem;
-            font-weight: bold;
             font-family: @heading-font;
+            
+            &:not(.wr-cell) {
+                font-weight: bold;
+            }
         }
 
         td.rules-text {

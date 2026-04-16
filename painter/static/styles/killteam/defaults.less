@@ -20,14 +20,14 @@
         z-index: 0;
 
         background-image: var(--image);
-        background-size: 250rem;
-        background-position: -100rem -75rem;
+        background-size: 250rem 250rem;
+        background-position: -100rem -100rem;
         background-repeat: no-repeat;
 
         filter: blur(1px) opacity(20%);
 
         &::after {
-            content: "an after element";
+            content: "";
 
             position: absolute;
             top: 0;
@@ -36,7 +36,7 @@
             width: 100%;
 
             background-image: var(--image);
-            background-size: 400rem;
+            background-size: 400rem 400rem;
             background-position: -20rem 120rem;
             background-repeat: no-repeat;
 
@@ -62,9 +62,18 @@
         display: flex;
         flex-flow: column;
 
+
+        // In text blocks, use the classic Kill-Team emphasis style of capitalised other-font
+        // text on keywords.
+        b {
+            text-transform: uppercase;
+            font-family: @heading-font;
+            font-size: 90%;
+        }
+        
         .rules-text {
             padding: 0rem 2rem;
-            font-size: 12rem;
+            font-size: 11rem;
 
             p:not(:last-of-type) {
                 margin-bottom: 5rem;
@@ -78,14 +87,6 @@
                     margin-left: 15rem;
                 }
             }
-
-            // Use the classic Kill-Team emphasis style of orange text on keywords.
-            b {
-                // color: @kt-orange;
-                text-transform: uppercase;
-                font-family: @heading-font;
-                font-size: 90%;
-            }
         }
 
         .action {
@@ -95,7 +96,7 @@
 
                 font-family: @heading-font;
                 text-transform: uppercase;
-                color: #ffffff;
+                color: @white;
                 font-weight: bold;
 
                 display: flex;
@@ -107,11 +108,15 @@
                 width: 100%;
                 padding: 5rem 7rem;
                 border: 2px solid @kt-orange;
-                background-color: fade(@kt-grey, 50%);
+                background-color: fade(@white, 50%);
                 
                 display: flex;
                 flex-flow: column;
                 gap: 5rem;
+
+                .text p:not(:last-of-type) {
+                    margin-bottom: 3rem;
+                }
             }
         }
     }

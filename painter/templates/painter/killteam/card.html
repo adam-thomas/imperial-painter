@@ -8,7 +8,7 @@
 {% block body %}
     <div class="timing">
         <div class="label">Play timing</div>
-        <div class="description">{{ c.timing|default:"At any time." }}</div>
+        <div class="description">{{ c.timing|default:"No restrictions. <i>(Card plays can occur during the Strategy phase, when an operative's activation begins or ends, or after any action is declared.)</i>"|safe }}</div>
     </div>
 
     <div class="rules-text">

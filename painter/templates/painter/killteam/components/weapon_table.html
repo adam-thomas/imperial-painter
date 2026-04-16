@@ -24,7 +24,7 @@
                     <td>{{ atks | index:loop_index }}</td>
                     <td>{{ hits | index:loop_index }}</td>
                     <td>{{ dmgs | index:loop_index }}</td>
-                    <td>{{ wrs | index:loop_index }}</td>
+                    <td class="wr-cell">{{ wrs | index:loop_index }}</td>
                 </tr>
             {% endwith %}
         {% endfor %}
