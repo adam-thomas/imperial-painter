@@ -1,0 +1,46 @@
+{% extends "painter/killteam/_base.html" %}
+
+{% load index %}
+
+{% block header %}
+    {{ name }}
+{% endblock %}
+
+{% block stats %}
+    <div class="stats">
+        <div class="stat-entry">
+            <span class="label">APL</span>
+            <span class="value">{{ c.apl }}</span>
+        </div>
+        <div class="stat-entry">
+            <span class="label">Move</span>
+            <span class="value">{{ c.move }}</span>
+        </div>
+        <div class="stat-entry">
+            <span class="label">Save</span>
+            <span class="value">{{ c.save }}</span>
+        </div>
+        <div class="stat-entry">
+            <span class="label">Wounds</span>
+            <span class="value">{{ c.wounds }}</span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    {% include "painter/killteam/components/weapon_table.html" with names=c.weapon_name types=c.weapon_type atks=c.atk hits=c.hit dmgs=c.dmg wrs=c.weapon_abilities weapon_ability_rules=c.weapon_ability_rules %}
+
+    {% if c.abilities %}
+        <div class="rules-text">
+            {% for ability in c.abilities %}
+                <p>{{ ability|safe }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% for cost in c.action_costs %}
+        {% with loop_index=forloop.counter|add:"-1" %}
+            {% include "painter/killteam/components/action.html" with name=c.action_names|index:loop_index cost=cost text=c.action_texts|index:loop_index %}
+        {% endwith %}
+    {% endfor %}
+{% endblock %}

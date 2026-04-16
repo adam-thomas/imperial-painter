@@ -1,0 +1,42 @@
+{% load index %}
+{% load static %}
+
+<table class="weapons">
+    <thead>
+        <tr>
+            <td></td>
+            <td>Name</td>
+            <td>Atk</td>
+            <td>Hit</td>
+            <td>Dmg</td>
+            <td>WR</td>
+        </tr>
+    </thead>
+
+    <tbody>        
+        {% for name in names %}
+            {% with loop_index=forloop.counter|add:"-1" %}
+                <tr>
+                    <td class="icon-cell">
+                        <img src="{% static "images/killteam/" %}{{ types | index:loop_index | lower }}.png" />
+                    </td>
+                    <td>{{ name }}</td>
+                    <td>{{ atks | index:loop_index }}</td>
+                    <td>{{ hits | index:loop_index }}</td>
+                    <td>{{ dmgs | index:loop_index }}</td>
+                    <td class="wr-cell">{{ wrs | index:loop_index }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+    </tbody>
+
+    {% if weapon_ability_rules %}
+        <tr>
+            <td colspan="6" class="rules-text">
+                {% for ability in c.weapon_ability_rules %}
+                    <p>{{ ability|safe }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+</table>

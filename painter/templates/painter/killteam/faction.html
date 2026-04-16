@@ -1,0 +1,17 @@
+{% extends "painter/killteam/_base.html" %}
+
+{% block header %}
+    {{ name }}
+{% endblock %}
+
+{% block body %}
+    <div class="rules-text">
+        {% for effect in c.effects %}
+            <p>{{ effect|safe }}</p>
+        {% endfor %}
+    </div>
+
+    {% if c.action_cost %}
+        {% include "painter/killteam/components/action.html" with name=c.action_name cost=c.action_cost text_list=c.action_text weapon=c %}
+    {% endif %}
+{% endblock %}

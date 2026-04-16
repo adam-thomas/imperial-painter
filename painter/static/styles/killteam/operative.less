@@ -1,0 +1,62 @@
+
+.full-card.template-operative {
+    header, .stat-entry {
+        background-color: fade(@kt-dark, 75%);
+        font-size: 16rem;
+        font-family: @heading-font;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: @white;
+    }
+
+    header {
+        padding: 6rem 5rem;
+        text-align: center;
+        font-size: 16rem;
+    }
+
+    .stats {
+        width: 100%;
+
+        display: flex;
+        flex-flow: row;
+        gap: 3rem;
+
+        .stat-entry {
+            flex: 1 1 auto;
+        
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+
+            .label {
+                color: @kt-orange;
+                font-size: 8rem;
+            }
+
+            .value {
+                font-size: 11rem;
+            }
+        }
+    }
+
+    .card-body {
+        padding: 5rem;
+        gap: 5rem;
+
+        .rules-text {
+            font-size: 9rem;
+            
+            p:not(:last-of-type) {
+                margin-bottom: 3rem;
+            }
+        }
+
+        .action .body {
+            padding: 2rem 3rem;
+            font-size: 9rem;
+        }
+    }
+}

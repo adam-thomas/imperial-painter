@@ -1,0 +1,61 @@
+
+.full-card.template-card {
+    .contents {
+        header {
+            display: flex;
+            flex-flow: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .pentiment {
+                flex: 0 0 auto;
+
+                font-size: 60rem;
+                line-height: 0.75;
+                font-family: @pentiment-font;
+                color: @kt-orange;
+            }
+
+            .rest-of-name {
+                width: 100%;
+                flex: 0 1 auto;
+
+                padding-top: 2rem;
+                font-size: 13rem;
+                line-height: 1.1;
+                font-family: @proclamation-font;
+            }
+        }
+
+        .card-body {
+            .timing {
+                width: 100%;
+
+                display: flex;
+                flex-flow: column;
+                align-items: flex-start;
+
+                .label {
+                    padding: 2rem 5rem 0rem 5rem;
+                    background-color: @kt-dark;
+                    color: @white;
+                    
+                    font-size: 7rem;
+                    font-family: @heading-font;
+                    text-transform: uppercase;
+                }
+
+                .description {
+                    width: 100%;
+                    padding: 1rem 5rem;
+                    border: 2px solid @kt-dark;
+                    background-color: fade(@white, 50%);
+                }
+            }
+
+            .action .body {
+                font-size: 10rem;
+            }
+        }
+    }
+}
