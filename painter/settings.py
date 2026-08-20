@@ -78,6 +78,10 @@ GENERATORS = {
         "key": "bfg",
         "name": "Battlefleet Gothic",
     },
+    "goblin_quest": {
+        "key": "goblin_quest",
+        "name": "Goblin Quest",
+    },
     "killteam": {
         "key": "killteam",
         "name": "Kill-Team",

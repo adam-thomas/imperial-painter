@@ -1,0 +1,81 @@
+.spoiler .row .full-card {
+    padding: 8rem 6rem;
+
+    position: relative;
+
+    background: #FFFFFF;
+    background: radial-gradient(circle,#ffffff 53%, #B8D6B4 100%);
+
+    display: flex;
+    flex-flow: column;
+
+    &.template-reminder {
+        font-family: "EB Garamond";
+        font-size: 7rem;
+
+        display: flex;
+        flex-flow: column;
+        gap: 7rem;
+
+        .box {
+            display: flex;
+            flex-flow: column;
+            gap: 1rem;
+        }
+
+        h2 {
+            font-family: "Fondamento";
+            font-size: 9rem;
+        }
+    }
+
+    &.template-readable1, &.template-readable2 {
+        font-family: "Arial";
+        font-size: 9rem;
+
+        display: flex;
+        flex-flow: column;
+        gap: 10rem;
+
+        .box {
+            display: flex;
+            flex-flow: column;
+            gap: 5rem;
+        }
+
+        h2 {
+            font-family: "Fondamento";
+            font-size: 12rem;
+        }
+    }
+
+    .game-title {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 2rem 6rem;
+
+        h1 {
+            color: #0A6603;
+            font-family: "Freckle Face";
+            font-size: 12rem;
+            margin: 0;
+        }
+    }
+
+    p, li {
+        margin: 0;
+    }
+
+    ol, ul {
+        margin: 0 0 0 10rem;
+    }
+
+    .grid {
+        display:grid;
+        grid-template-columns: calc(50% - 3.5rem) calc(50% - 3.5rem);
+        grid-row: auto auto;
+        grid-column-gap: 7rem;
+        grid-row-gap: 7rem;
+    }
+}
