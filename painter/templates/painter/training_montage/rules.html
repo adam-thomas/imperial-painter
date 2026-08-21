@@ -1,31 +1,38 @@
 <div class="full-card">
     <div class="reminder">
-        <h6>Setup</h6>
-        <ul>
-            <li>Both players start on 50 Health.</li>
-            <li>The player going first starts with four cards in hand, and the player going second starts with five.</li>
-            <li>Shuffle the supply deck and deal seven cards as the starting supply. Place the supply of Sensei's Assistances next to the deck.</li>
-        </ul>
 
         <h6>1. Action Phase</h6>
         <p>
-            During your action phase, you may play <b>attack</b> cards and <b>focus</b> cards. Your opponent may play <b>block</b> or <b>reversal</b> cards they have set up.
+            You may play <b>attack</b> cards and <b>focus</b> cards. <b>Focus</b> cards just do what they say immediately.
         </p>
         <p>
-            Each of these cards has a <i>Combo</i> cost on the left hand side.  Each player starts each action phase with 2 Combo Points.
-            You must pay the Combo cost for any card in order to play it.
-        </p>
-
-        <h6>2. Lesson Phase</h6>
-        <p>
-            During your learning phase, you may play any of the cards in your hand to make Wisdom. Ignore their normal costs and effects;
-            instead, each card generates Wisdom equal to its Wisdom value (on the left, in a dark box).
+            Cards have a <b>Stamina</b> cost to play. Each player starts <i>each</i> Action Phase (yours and your opponent's) with 2 Stamina.
+            Leftover Stamina doesn't carry over to future phases.
         </p>
         <p>
-            You may learn any card from the supply by paying its Wisdom cost. Set aside any newly learned cards.
+            Whenever you <b>attack</b> your opponent, if they have any defence cards in play (see the Defence Phase), they reveal the leftmost one
+            (from their perspective).
         </p>
         <p>
-            After you're done making Wisdom and learning things, discard your played cards and go to the end phase.
+            If the revealed card is a <b>block</b> card or a card with a <b>reversal</b> ability, they may play it, paying its Stamina cost.
+            A block card always blocks the attack that revealed it. If your opponent doesn't block the attack, it <b>hits</b>, and deals damage
+            equal to its damage value to them.
         </p>
+        <p>
+            After you're done attacking and playing focus cards, discard all the cards you played this phase, and move to the Lesson Phase.
+            Your opponent also discards any remaining face-down defence cards they have in play.
+        </p>
+        
+        <h6>Attack card types</h6>
+        <p>
+            There are three kinds of attack cards:
+        </p>
+        <ul>
+            <li><b>Normal attacks</b>: Whenever you hit your opponent with a normal attack,
+            you gain 1 Stamina and they lose 1 Stamina.</li>
+            <li><b>Special attacks</b>: Whenever you hit your opponent with a special attack, they lose all their Stamina.</li>
+            <li><b>Throws</b>: Throws cannot be blocked! However, if the revealed defence card is <i>not</i> a block,
+            the throw is considered <b>avoided</b>, and has no effect.</li>
+        </ul>
     </div>
 </div>

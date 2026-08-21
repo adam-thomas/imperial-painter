@@ -3,25 +3,29 @@
 /* ----------------------------------------------------------------------- */
 
 .card-contents-upper .stats-left {
-    padding-top: 5rem;
-
     .stat-item {
         width: 100%;
         min-height: 35rem;
-        margin-bottom: 3rem;
+        margin-bottom: 4rem;
         vertical-align: center;
         overflow: visible;
 
         &:not(.bg-cost) {
             color: var(--highlight-colour);
             background-color: var(--style-colour);
+            
+            border: 2px solid #292929;
+            border-left: none;
+
+            &:first-of-type {
+                border-top: none;
+            }
         }
 
         .type-icon {
             /* An icon for the card type. Extends above the frame. */
             height: 33rem;
-            margin-bottom: 3rem;
-            margin-top: -3rem;
+            padding: 2rem;
             overflow: visible;
         }
 
@@ -38,17 +42,17 @@
             /* Some small text clarifying what the number means. */
             font-size: 8rem;
             text-align: center;
-            margin-top: -6rem;
-            padding-bottom: 1rem;
+            margin-top: -4rem;
+            padding-bottom: 2rem;
             margin-left: -2rem;
         }
     }
 
     .art-credit {
         width: 100rem;
-        height: 20rem;
+        height: 12rem;
 
-        margin: -15rem 0 0 7rem;
+        margin: -7rem 0 0 7rem;
         transform: rotate(90deg);
         transform-origin: bottom left;
 

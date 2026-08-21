@@ -4,7 +4,7 @@
 
 .full-card {
     // Set the font here for scaling purposes.
-    font-family: "Trebuchet MS";
+    font-family: "Liberation Serif";
     font-size: 10rem;
 
     &, * {
@@ -54,24 +54,25 @@
 
             .stats-left {
                 height: 100%;
-                width: 33rem;
+                width: 35rem;
                 flex: 0 0 auto;
             }
 
             .card-text {
                 height: 100%;
-                width: calc(100% - 33rem);
+                width: calc(100% - 35rem);
                 flex: 0 1 auto;
 
                 display: flex;
                 flex-flow: column;
 
                 .card-name {
-                    // No left/right padding on this one; allow it to extend into the border.
-                    padding-right: 5rem;
+                    padding-right: 8rem;
                     width: 100%;
                     min-height: 24rem;
                     flex: 0 0 auto;
+
+                    font-family: "DM Serif Display";
                 }
 
                 .card-body {
@@ -123,11 +124,19 @@
         // The type line and wisdom cost listed along the bottom.
         .card-contents-lower {
             width: 100%;
-            height: 35rem;
+            height: 33rem;
             flex: 0 0 auto;
-
-            display: flex;
-            flex-flow: row;
         }
+    }
+        
+    // General helper style for <div style="--icon-url: [url]"> SVG containers.
+    // Set that property, plus a `background-color` to colour the SVG.
+    .with-icon-url {
+        -webkit-mask-image: var(--icon-url);
+        -webkit-mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        mask-image: var(--icon-url);
+        mask-position: center;
+        mask-repeat: no-repeat;
     }
 }

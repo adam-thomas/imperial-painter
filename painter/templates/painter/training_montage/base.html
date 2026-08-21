@@ -2,36 +2,37 @@
 {% load static %}
 
 <div class="colour-{{ c.style }} full-card">
-    <div class="card-background"></div>
+    <div class="card-background">
+        <div class="watermark with-icon-url" style="--icon-url: url({% static 'images/training_montage/style_icons/style-' %}{{ c.style }}.svg);"></div>
+    </div>
 
     <div class="card-contents">
         <div class="card-contents-upper">
 
             <div class="stats-left">
-                <div class="stat-item bg-{{ c.style }}">
+                <div class="stat-item">
                     <img class="type-icon"
-                        src="{% static 'images/training_montage/' %}{{ c.type }}-{% if c.style == 'basic' or c.style == 'crane'%}dark{% else %}light{% endif %}.svg"
+                        src="{% static 'images/training_montage/type_icons/' %}{{ c.type }}-{% if c.style == 'basic' %}dark{% else %}light{% endif %}.svg"
                     >
                     <p class="stat-label">{{ c.type }}</p>
                 </div>
-                <div class="stat-item bg-{{ c.style }}">
-                    <p class="stat-value">{{ c.cp|default:0 }}</p>
-                    <p class="stat-label">combo</p>
+                <div class="stat-item">
+                    <p class="stat-value">{{ c.stamina|default:0 }}</p>
+                    <p class="stat-label">stamina</p>
                 </div>
-                {% if c.type == 'normal' or c.type == 'special' or c.damage %}
-                    <div class="stat-item bg-{{ c.style }}">
+                {% if c.type == 'normal' or c.type == 'special' or c.type == 'throw' or c.damage %}
+                    <div class="stat-item">
                         <p class="stat-value">{{ c.damage|default:0 }}</p>
                         <p class="stat-label">damage</p>
                     </div>
                 {% endif %}
                 <div class="bg-cost stat-item">
-                    <p class="stat-value text-highlight-cost">{{ c.wisdom|default:0 }}</p>
-                    <p class="stat-label text-highlight-cost">wisdom</p>
+                    <p class="stat-value">{{ c.wisdom|default:0 }}</p>
+                    <p class="stat-label">wisdom</p>
                 </div>
 
                 <div class="art-credit">
-                    Art from Duelyst
-                    <br>© Counterplay Games
+                    Art © Counterplay Games
                 </div>
             </div>
 
@@ -41,7 +42,7 @@
 
                 <div class="text-size-{{ c.text_size }} card-body">
                     <div class="art-wrapper">
-                        <div class="art" style="background-image: url({% static 'images/training_montage/art-' %}{{ c.style }}.png"></div>
+                        <div class="art" style="background-image: url({% static 'images/training_montage/art/art-' %}{{ c.style }}.png"></div>
                     </div>
 
                     <div class="rules-wrapper">
@@ -60,8 +61,6 @@
                                 {{ c.flavour_text|default:''|safe }}
                             </div>
                         {% endif %}
-
-                        <div class="watermark" style="--icon-url: url({% static 'images/training_montage/style-' %}{{ c.style }}.svg);"></div>
                     </div>
                 </div>
 
@@ -82,10 +81,14 @@
                 </span>
             </div>
 
-            <div class="learning-cost bg-cost">
-                <div class="cost-value text-highlight-cost" {% if c.cost >= 10 %}style="min-width: 4em"{% endif %}>{{ c.cost|default:0 }}</div>
+            {% if c.style != 'basic' %}
+                <div class="style-icon with-icon-url" style="--icon-url: url({% static 'images/training_montage/style_icons/style-' %}{{ c.style }}.svg);"></div>
+            {% endif %}
+
+            <div class="learning-cost bg-{% if c.cost == "S" %}{{ c.style }}{% else %}cost{% endif %}">
+                <div class="cost-value" {% if c.cost >= 10 %}style="min-width: 4em"{% endif %}>{{ c.cost|default:0 }}</div>
                 <div class="cost-label-wrapper">
-                    <div class="cost-label text-highlight-cost">cost</div>
+                    <div class="cost-label">{% if c.cost == "S" %}starter{% else %}cost{% endif %}</div>
                 </div>
             </div>
 

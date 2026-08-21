@@ -1,5 +1,8 @@
 
-.card-contents-lower {
+.full-card .card-contents .card-contents-lower {
+    display: flex;
+    flex-flow: row;
+    gap: 2rem;
 
     .style-display {
         padding: 0 2rem 12rem 12rem;
@@ -28,6 +31,14 @@
         }
     }
 
+    .style-icon {
+        height: 23rem;
+        width: 23rem;
+        flex: 0 0 auto;
+
+        background-color: var(--style-colour);
+    }
+
     .learning-cost {
         min-width: 37rem;
         height: 100%;
@@ -38,6 +49,11 @@
         display: flex;
         flex-flow: row;
         justify-content: flex-end;
+        
+        &:not(.bg-cost) {
+            color: var(--highlight-colour);
+            background-color: var(--style-colour);
+        }
 
         .cost-value, .cost-label-wrapper {
             display: flex;
