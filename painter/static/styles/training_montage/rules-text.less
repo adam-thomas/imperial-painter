@@ -17,49 +17,26 @@
 
     .card-body {
         &.text-size-large {
-            .rules {
-                padding-top: 8rem;
+            .rules-wrapper .rules {
                 font-size: 13rem;
-            }
-
-            .text-separator {
-                margin: 9rem auto;
-            }
-
-            .flavour {
-                font-size: 9rem;
             }
         }
 
         &.text-size-medium {
-            .rules {
-                padding-top: 8rem;
+            .rules-wrapper .rules {
                 font-size: 11rem;
-            }
-
-            .text-separator {
-                margin: 8rem auto;
-
-            }
-
-            .flavour {
-                font-size: 8rem;
             }
         }
 
         &.text-size-small {
-            .rules {
-                padding-top: 6rem;
-                font-size: 9rem;
-            }
-
-            .text-separator {
-                margin: 6rem auto;
-
-            }
-
-            .flavour {
-                font-size: 8rem;
+            .rules-wrapper {
+                .rules {
+                    font-size: 9rem;
+                }
+    
+                .text-separator {
+                    margin: 6rem auto;
+                }
             }
         }
 
@@ -78,6 +55,9 @@
             }
 
             .rules {
+                padding-top: 2rem;
+                min-height: 40%;
+
                 p:not(:last-of-type) {
                     padding-bottom: 6rem;
                 }
@@ -89,16 +69,16 @@
 
             .text-separator {
                 width: 100%;
-                text-align: center;
-                background-color: #c0c0c0;
-                border-width: 0;
                 height: 1rem;
                 min-height: 1px;
-                overflow: hidden;
-                z-index: 2;
+                margin: 8rem auto;
+
+                background-color: #c0c0c0;
+                border-width: 0;
             }
 
             .flavour {
+                font-size: 8rem;
                 font-style: italic;
             }
         }

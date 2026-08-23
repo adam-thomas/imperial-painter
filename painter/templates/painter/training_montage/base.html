@@ -46,17 +46,14 @@
                     </div>
 
                     <div class="rules-wrapper">
-                        {% if c.rules_text %}
-                            <div class="rules">
-                                {% for rt in c.rules_text %}
-                                    <p>{{ rt|safe }}</p>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-
-                        {% if c.rules_text and c.flavour_text %}<hr class="text-separator" />{% endif %}
+                        <div class="rules">
+                            {% for rt in c.rules_text %}
+                                <p>{{ rt|safe }}</p>
+                            {% endfor %}
+                        </div>
 
                         {% if c.flavour_text %}
+                            <hr class="text-separator" />
                             <div class="flavour">
                                 {{ c.flavour_text|default:''|safe }}
                             </div>
