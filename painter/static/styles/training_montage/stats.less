@@ -4,59 +4,67 @@
 
 .card-contents-upper .stats-left {
     .stat-item {
-        width: 100%;
-        min-height: 35rem;
-        margin-bottom: 4rem;
-        vertical-align: center;
-        overflow: visible;
+        border: none;
+        border-radius: 0 4rem 4rem 0;
 
-        &:not(.bg-cost) {
-            color: var(--highlight-colour);
-            background-color: var(--style-colour);
-            
-            border: 2px solid #292929;
-            border-left: none;
-
-            &:first-of-type {
-                border-top: none;
-            }
-        }
-
-        .type-icon {
-            /* An icon for the card type. Extends above the frame. */
-            height: 33rem;
-            padding: 2rem;
-            overflow: visible;
-        }
-
-        .stat-value {
-            /* A large number. */
-            font-weight: bold;
-            font-size: 25rem;
-            text-align: center;
-            letter-spacing: -1rem;
-            margin-left: -2rem;
-        }
-
-        .stat-label {
-            /* Some small text clarifying what the number means. */
-            font-size: 8rem;
-            text-align: center;
-            margin-top: -4rem;
-            padding-bottom: 2rem;
+        .stat-label, .stat-value {
             margin-left: -2rem;
         }
     }
+}
+    
+.stat-item {
+    width: 32rem;
+    border-radius: 2rem;
+    margin-bottom: 4rem;
+    vertical-align: center;
+    overflow: visible;
 
-    .art-credit {
-        width: 100rem;
-        height: 12rem;
+    &:not(.bg-cost) {
+        color: var(--highlight-colour);
+        background-color: var(--style-colour);
+        border: 2px solid var(--outline-colour);
+    }
 
-        margin: -7rem 0 0 7rem;
-        transform: rotate(90deg);
-        transform-origin: bottom left;
+    &.large {
+        .stat-value {
+            font-size: 25rem;
+        }
+        
+        .type-icon {
+            height: 33rem;
+        }
+    }
 
-        font-size: 7rem;
-        color: #808080;
+    &.small {
+        .stat-value {
+            font-size: 16rem;
+        }
+        
+        .type-icon {
+            height: 24rem;
+        }
+    }
+
+    .type-icon {
+        /* An icon for the card type. Extends above the frame. */
+        padding: 2rem;
+        overflow: visible;
+    }
+
+    .stat-value {
+        /* A large number. */
+        font-weight: bold;
+        text-align: center;
+        letter-spacing: -1rem;
+    }
+
+    .stat-label {
+        /* Some small text clarifying what the number means. */
+        font-size: 8rem;
+        text-align: center;
+        font-family: "Strait";
+        margin-top: -4rem;
+        padding-bottom: 2rem;
     }
 }

@@ -1,6 +1,7 @@
 dj-database-url==3.1.0
+dj-svg==0.3.1
 Django==6.0.1
 django-extensions==4.1
 lxml==6.0.2
 openpyxl==3.1.5
-psycopg2-binary==2.9.11
+psycopg2==2.9.11

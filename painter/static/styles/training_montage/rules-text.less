@@ -8,6 +8,7 @@
         color: var(--highlight-colour);
         font-weight: bold;
         font-size: 15rem;
+        font-family: "DM Serif Display";
 
         display: flex;
         align-items: center;
@@ -16,26 +17,64 @@
     }
 
     .card-body {
-        &.text-size-large {
-            .rules-wrapper .rules {
-                font-size: 13rem;
+        &.text-size-large, &.text-size-splash {
+            .rules-wrapper {
+                section.rules {
+                    padding: 10rem 10rem 0 10rem;
+                    font-size: 11rem;
+                }
+
+                .flavour {
+                    padding: 0 10rem 6rem 10rem;
+                }
             }
         }
 
         &.text-size-medium {
-            .rules-wrapper .rules {
-                font-size: 11rem;
+            .rules-wrapper {
+                section.rules {
+                    padding: 8rem 8rem 0 8rem;
+                    font-size: 10rem;
+                }
+
+                .flavour {
+                    padding: 0 8rem 5rem 8rem;
+                }
             }
         }
 
         &.text-size-small {
             .rules-wrapper {
-                .rules {
+                section.rules {
                     font-size: 9rem;
                 }
     
                 .text-separator {
                     margin: 6rem auto;
+                }
+            }
+        }
+
+        &.text-size-tiny {
+            .rules-wrapper {
+                section.rules {
+                    font-size: 8.5rem;
+                    gap: 4rem;
+                }
+    
+                .text-separator {
+                    margin: 4rem auto;
+                }
+            }
+        }
+
+        &.text-size-splash {
+            section.rules {
+                align-items: center;
+                justify-content: center;
+                
+                p {
+                    text-align: center;
                 }
             }
         }
@@ -52,15 +91,76 @@
             .rules, .flavour {
                 color: #000000;
                 z-index: 2;
+                padding: 0 5rem;
+
+                .wisdom-cost-spacer {
+                    // This sits in the bottom-right corner, and takes up the same amount of space
+                    // as the top of the cost boxout, causing text to reflow around it.
+                    width: 30rem;
+                    height: 10rem;
+                    display: inline;
+                    float: right;
+                }
             }
 
-            .rules {
-                padding-top: 2rem;
-                min-height: 40%;
+            .type-line {
+                width: 100%;
+                height: 20rem;
+                overflow: visible;
+                background-color: var(--style-colour);
+                
+                padding-right: 3rem;
+                
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                gap: 3rem;
 
-                p:not(:last-of-type) {
-                    padding-bottom: 6rem;
+                .type-icon {
+                    height: 32rem;
+                    width: 32rem;
+                    margin-left: -5rem;
+                    flex: 0 0 auto;
+
+                    path {
+                        stroke: var(--outline-colour);
+                        stroke-width: 40px;  // Scaled for a 512x512 viewbox
+                        stroke-linejoin: round;
+                        paint-order: stroke;
+                    }
                 }
+
+                .type-name {
+                    width: 100%;
+                    flex: 0 1 auto;
+                    
+                    // font-family: "DM Serif Display";
+                    font-weight: bold;
+                    color: var(--highlight-colour);
+                    font-size: 10rem;
+                    text-transform: uppercase;
+                }
+
+                .stat-item {
+                    flex: 0 0 auto;
+                }
+            }
+
+            section.rules {
+                padding-top: 6rem;
+
+                &:not(:last-of-type) {
+                    padding-bottom: 16rem;
+                }
+
+                &:last-of-type {
+                    height: 100%;
+                    flex: 0 1 auto;
+                }
+
+                display: flex;
+                flex-flow: column;
+                gap: 6rem;
 
                 i {
                     color: #404040;
@@ -69,17 +169,19 @@
 
             .text-separator {
                 width: 100%;
-                height: 1rem;
-                min-height: 1px;
-                margin: 8rem auto;
+                height: 1px;
+                margin: 5rem auto;
+                align-self: flex-end;
 
                 background-color: #c0c0c0;
                 border-width: 0;
             }
 
             .flavour {
+                padding-bottom: 3rem;
                 font-size: 8rem;
                 font-style: italic;
+                align-self: flex-end;
             }
         }
     }

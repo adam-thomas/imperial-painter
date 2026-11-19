@@ -13,6 +13,7 @@ INSTALLED_APPS = (
     "painter",
 
     "django_extensions",
+    "dj_svg",
 
     'django.contrib.admin',
     "django.contrib.auth",
@@ -66,6 +67,7 @@ USE_TZ = False
 
 STATIC_ROOT = os.path.join(BASE_DIR, "painter/static")
 STATIC_URL = os.environ.get("STATIC_URL", "/static/")
+SVG_DIRS = [STATIC_ROOT]
 
 # Imperial Painter settings
 DEFAULT_IMPORTER = "painter.importers.import_cards"
